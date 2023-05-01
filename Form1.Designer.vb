@@ -47,6 +47,17 @@ Partial Class Form1
         Me.NotifyIconMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnuExit = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExecutableDialog = New System.Windows.Forms.OpenFileDialog()
+        Me.tabStatistics = New System.Windows.Forms.TabPage()
+        Me.lblBlockHeight = New System.Windows.Forms.Label()
+        Me.txtBlockHeight = New System.Windows.Forms.TextBox()
+        Me.txtDifficulty = New System.Windows.Forms.TextBox()
+        Me.lblDifficulty = New System.Windows.Forms.Label()
+        Me.txtHashrate = New System.Windows.Forms.TextBox()
+        Me.lblHashRate = New System.Windows.Forms.Label()
+        Me.txtPoolBalance = New System.Windows.Forms.TextBox()
+        Me.lblPoolBalance = New System.Windows.Forms.Label()
+        Me.txtConfirmedPoolBalance = New System.Windows.Forms.TextBox()
+        Me.lblConfirmedPoolBalance = New System.Windows.Forms.Label()
         Me.TabControl.SuspendLayout()
         Me.tabStatus.SuspendLayout()
         CType(Me.pbxStatus, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -54,6 +65,7 @@ Partial Class Form1
         Me.tabSettings.SuspendLayout()
         Me.gbxNoncerPro.SuspendLayout()
         Me.NotifyIconMenu.SuspendLayout()
+        Me.tabStatistics.SuspendLayout()
         Me.SuspendLayout()
         '
         'MiningProcess
@@ -69,6 +81,7 @@ Partial Class Form1
         'TabControl
         '
         Me.TabControl.Controls.Add(Me.tabStatus)
+        Me.TabControl.Controls.Add(Me.tabStatistics)
         Me.TabControl.Controls.Add(Me.tabOutput)
         Me.TabControl.Controls.Add(Me.tabSettings)
         Me.TabControl.Dock = System.Windows.Forms.DockStyle.Fill
@@ -262,6 +275,122 @@ Partial Class Form1
         '
         Me.ExecutableDialog.Title = "Specify NoncerPro Location"
         '
+        'tabStatistics
+        '
+        Me.tabStatistics.Controls.Add(Me.txtConfirmedPoolBalance)
+        Me.tabStatistics.Controls.Add(Me.lblConfirmedPoolBalance)
+        Me.tabStatistics.Controls.Add(Me.txtPoolBalance)
+        Me.tabStatistics.Controls.Add(Me.lblPoolBalance)
+        Me.tabStatistics.Controls.Add(Me.txtHashrate)
+        Me.tabStatistics.Controls.Add(Me.lblHashRate)
+        Me.tabStatistics.Controls.Add(Me.txtDifficulty)
+        Me.tabStatistics.Controls.Add(Me.lblDifficulty)
+        Me.tabStatistics.Controls.Add(Me.txtBlockHeight)
+        Me.tabStatistics.Controls.Add(Me.lblBlockHeight)
+        Me.tabStatistics.Location = New System.Drawing.Point(4, 22)
+        Me.tabStatistics.Name = "tabStatistics"
+        Me.tabStatistics.Size = New System.Drawing.Size(792, 424)
+        Me.tabStatistics.TabIndex = 3
+        Me.tabStatistics.Text = "Statistics"
+        Me.tabStatistics.UseVisualStyleBackColor = True
+        '
+        'lblBlockHeight
+        '
+        Me.lblBlockHeight.AutoSize = True
+        Me.lblBlockHeight.Location = New System.Drawing.Point(280, 24)
+        Me.lblBlockHeight.Name = "lblBlockHeight"
+        Me.lblBlockHeight.Size = New System.Drawing.Size(68, 13)
+        Me.lblBlockHeight.TabIndex = 0
+        Me.lblBlockHeight.Text = "Block Height"
+        Me.lblBlockHeight.TextAlign = System.Drawing.ContentAlignment.TopRight
+        '
+        'txtBlockHeight
+        '
+        Me.txtBlockHeight.BackColor = System.Drawing.Color.White
+        Me.txtBlockHeight.Location = New System.Drawing.Point(354, 21)
+        Me.txtBlockHeight.Name = "txtBlockHeight"
+        Me.txtBlockHeight.ReadOnly = True
+        Me.txtBlockHeight.Size = New System.Drawing.Size(100, 20)
+        Me.txtBlockHeight.TabIndex = 1
+        Me.txtBlockHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'txtDifficulty
+        '
+        Me.txtDifficulty.BackColor = System.Drawing.Color.White
+        Me.txtDifficulty.Location = New System.Drawing.Point(354, 56)
+        Me.txtDifficulty.Name = "txtDifficulty"
+        Me.txtDifficulty.ReadOnly = True
+        Me.txtDifficulty.Size = New System.Drawing.Size(100, 20)
+        Me.txtDifficulty.TabIndex = 3
+        Me.txtDifficulty.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'lblDifficulty
+        '
+        Me.lblDifficulty.AutoSize = True
+        Me.lblDifficulty.Location = New System.Drawing.Point(301, 59)
+        Me.lblDifficulty.Name = "lblDifficulty"
+        Me.lblDifficulty.Size = New System.Drawing.Size(47, 13)
+        Me.lblDifficulty.TabIndex = 2
+        Me.lblDifficulty.Text = "Difficulty"
+        Me.lblDifficulty.TextAlign = System.Drawing.ContentAlignment.TopRight
+        '
+        'txtHashrate
+        '
+        Me.txtHashrate.BackColor = System.Drawing.Color.White
+        Me.txtHashrate.Location = New System.Drawing.Point(354, 92)
+        Me.txtHashrate.Name = "txtHashrate"
+        Me.txtHashrate.ReadOnly = True
+        Me.txtHashrate.Size = New System.Drawing.Size(100, 20)
+        Me.txtHashrate.TabIndex = 5
+        Me.txtHashrate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'lblHashRate
+        '
+        Me.lblHashRate.Location = New System.Drawing.Point(238, 95)
+        Me.lblHashRate.Name = "lblHashRate"
+        Me.lblHashRate.Size = New System.Drawing.Size(110, 13)
+        Me.lblHashRate.TabIndex = 4
+        Me.lblHashRate.Text = "Hash Rate"
+        Me.lblHashRate.TextAlign = System.Drawing.ContentAlignment.TopRight
+        '
+        'txtPoolBalance
+        '
+        Me.txtPoolBalance.BackColor = System.Drawing.Color.White
+        Me.txtPoolBalance.Location = New System.Drawing.Point(354, 128)
+        Me.txtPoolBalance.Name = "txtPoolBalance"
+        Me.txtPoolBalance.ReadOnly = True
+        Me.txtPoolBalance.Size = New System.Drawing.Size(100, 20)
+        Me.txtPoolBalance.TabIndex = 7
+        Me.txtPoolBalance.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'lblPoolBalance
+        '
+        Me.lblPoolBalance.Location = New System.Drawing.Point(213, 131)
+        Me.lblPoolBalance.Name = "lblPoolBalance"
+        Me.lblPoolBalance.Size = New System.Drawing.Size(135, 13)
+        Me.lblPoolBalance.TabIndex = 6
+        Me.lblPoolBalance.Text = "Pool Balance"
+        Me.lblPoolBalance.TextAlign = System.Drawing.ContentAlignment.TopRight
+        '
+        'txtConfirmedPoolBalance
+        '
+        Me.txtConfirmedPoolBalance.BackColor = System.Drawing.Color.White
+        Me.txtConfirmedPoolBalance.Location = New System.Drawing.Point(354, 163)
+        Me.txtConfirmedPoolBalance.Name = "txtConfirmedPoolBalance"
+        Me.txtConfirmedPoolBalance.ReadOnly = True
+        Me.txtConfirmedPoolBalance.Size = New System.Drawing.Size(100, 20)
+        Me.txtConfirmedPoolBalance.TabIndex = 9
+        Me.txtConfirmedPoolBalance.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'lblConfirmedPoolBalance
+        '
+        Me.lblConfirmedPoolBalance.Location = New System.Drawing.Point(176, 166)
+        Me.lblConfirmedPoolBalance.Name = "lblConfirmedPoolBalance"
+        Me.lblConfirmedPoolBalance.Size = New System.Drawing.Size(172, 13)
+        Me.lblConfirmedPoolBalance.TabIndex = 8
+        Me.lblConfirmedPoolBalance.Text = "Confirmed Pool Balance"
+        Me.lblConfirmedPoolBalance.TextAlign = System.Drawing.ContentAlignment.TopRight
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -284,6 +413,8 @@ Partial Class Form1
         Me.gbxNoncerPro.ResumeLayout(False)
         Me.gbxNoncerPro.PerformLayout()
         Me.NotifyIconMenu.ResumeLayout(False)
+        Me.tabStatistics.ResumeLayout(False)
+        Me.tabStatistics.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -310,4 +441,15 @@ Partial Class Form1
     Friend WithEvents txtLocation As TextBox
     Friend WithEvents lblLocation As Label
     Friend WithEvents ExecutableDialog As OpenFileDialog
+    Friend WithEvents tabStatistics As TabPage
+    Friend WithEvents lblBlockHeight As Label
+    Friend WithEvents txtBlockHeight As TextBox
+    Friend WithEvents txtDifficulty As TextBox
+    Friend WithEvents lblDifficulty As Label
+    Friend WithEvents txtHashrate As TextBox
+    Friend WithEvents lblHashRate As Label
+    Friend WithEvents txtConfirmedPoolBalance As TextBox
+    Friend WithEvents lblConfirmedPoolBalance As Label
+    Friend WithEvents txtPoolBalance As TextBox
+    Friend WithEvents lblPoolBalance As Label
 End Class

@@ -156,6 +156,57 @@ Public Class Form1
 
     Private Sub Process_Output(Data As String)
 
+        Dim Key As String
+
+        Key = Data.Substring(31, 5)
+
+        Select Case Key
+            Case "New B"
+                'Block Height
+                Update_Block_Height(Data)
+            Case "Diffi"
+                'Difficulty
+                Update_Difficulty(Data)
+            Case "Total"
+                'Hash Rate
+                Update_Hashrate(Data)
+            Case "Pool "
+                'Pool Balance
+                Update_Pool_Balance(Data)
+        End Select
+
+    End Sub
+
+    Private Sub Update_Block_Height(Data As String)
+
+        Dim BlockHeight As String = Data.Substring(49)
+        txtBlockHeight.Text = BlockHeight
+
+    End Sub
+
+    Private Sub Update_Difficulty(Data As String)
+
+        Dim Difficulty As String = Data.Substring(51)
+        txtDifficulty.Text = Difficulty
+
+    End Sub
+
+    Private Sub Update_Hashrate(Data As String)
+
+        Dim Hashrate() As String = Data.Substring(47).Split(" ")
+        lblHashRate.Text = "Hash rate (" + Hashrate(1) + ")"
+        txtHashrate.Text = Hashrate(0)
+
+    End Sub
+
+    Private Sub Update_Pool_Balance(Data As String)
+
+        Dim PoolBalance() As String = Data.Substring(45).Split(" ")
+        lblPoolBalance.Text = "Pool Balance (" + PoolBalance(1) + ")"
+        lblConfirmedPoolBalance.Text = "Confirmed Pool Balance (" + PoolBalance(1) + ")"
+        txtPoolBalance.Text = PoolBalance(0)
+        txtConfirmedPoolBalance.Text = PoolBalance(3)
+
     End Sub
 
     Private Sub mnuExit_Click(sender As Object, e As EventArgs) Handles mnuExit.Click
