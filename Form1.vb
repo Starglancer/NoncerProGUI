@@ -23,6 +23,8 @@ Public Class Form1
         'Load configuration file
         Load_Configuration()
 
+        Save_Configuration()
+
         'Set timer intervals
         timCheckStatus.Interval = 1000
         timProcessOutput.Interval = 1000
@@ -248,6 +250,9 @@ Public Class Form1
         'Save persistent settings
         My.Settings.ExecutableLocation = txtLocation.Text
 
+        'Save configuration
+        Save_Configuration()
+
     End Sub
 
     Private Sub Get_Executable_Location()
@@ -280,24 +285,67 @@ Public Class Form1
             txtConfigDevices.Text = ConfigLine(5).Substring(11).Replace(",", "")
             txtConfigThreads.Text = ConfigLine(6).Substring(11).Replace(",", "")
             txtConfigBatchsize.Text = ConfigLine(7).Substring(13).Replace(",", "")
-            If ConfigLine(8).Substring(7).Replace(",", "") = True Then
+            If ConfigLine(8).Substring(7).Replace(",", "") = "true" Then
                 chkConfigAPI.Checked = True
             Else
                 chkConfigAPI.Checked = False
             End If
             txtConfigAPIport.Text = ConfigLine(9).Substring(11).Replace(",", "")
-            If ConfigLine(10).Substring(13).Replace(",", "") = True Then
+            If ConfigLine(10).Substring(13).Replace(",", "") = "true" Then
                 chkConfigOptimizer.Checked = True
             Else
                 chkConfigOptimizer.Checked = False
             End If
             txtConfigDifficulty.Text = ConfigLine(11).Substring(14).Replace(",", "")
-            If ConfigLine(12).Substring(16).Replace(",", "") = True Then
+            If ConfigLine(12).Substring(17).Replace(",", "") = "true" Then
                 chkConfigAutoOptimise.Checked = True
             Else
                 chkConfigAutoOptimise.Checked = False
             End If
         End If
+
+    End Sub
+
+    Private Sub Save_Configuration()
+
+        'Loader the configuration from the config file into the application
+        Dim ConfigFile As String
+        Dim Config As String = ""
+
+        ConfigFile = NoncerPath + "\miner.conf"
+
+        'Delete old version
+        If File.Exists(ConfigFile) Then File.Delete(ConfigFile)
+
+        'Build configuration file text
+        Config += "{" + Environment.NewLine
+        Config += """address"": """ + txtConfigAddress.Text + """," + Environment.NewLine
+        Config += """name"": """ + txtConfigName.Text + """," + Environment.NewLine
+        Config += """server"": '" + txtConfigServer.Text + "'," + Environment.NewLine
+        Config += """port"": " + txtConfigPort.Text + "," + Environment.NewLine
+        Config += """devices"": " + txtConfigDevices.Text + "," + Environment.NewLine
+        Config += """threads"": " + txtConfigThreads.Text + "," + Environment.NewLine
+        Config += """batchsize"": " + txtConfigBatchsize.Text + "," + Environment.NewLine
+        If chkConfigAPI.Checked = True Then
+            Config += """api"": true," + Environment.NewLine
+        Else
+            Config += """api"": false," + Environment.NewLine
+        End If
+        Config += """apiport"": " + txtConfigAPIport.Text + "," + Environment.NewLine
+        If chkConfigOptimizer.Checked = True Then
+            Config += """optimizer"": true," + Environment.NewLine
+        Else
+            Config += """optimizer"": false," + Environment.NewLine
+        End If
+        Config += """difficulty"": " + txtConfigDifficulty.Text + "," + Environment.NewLine
+        If chkConfigAutoOptimise.Checked = True Then
+            Config += """autoOptimizer"": true," + Environment.NewLine
+        Else
+            Config += """autoOptimizer"": false," + Environment.NewLine
+        End If
+        Config += "}" + Environment.NewLine
+
+        File.AppendAllText(ConfigFile, Config)
 
     End Sub
 
