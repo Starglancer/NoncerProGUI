@@ -7,6 +7,7 @@ Public Class Form1
     Dim Running As Boolean
     Dim OutputQueue As ConcurrentQueue(Of String) = New ConcurrentQueue(Of String)
     Dim ForceClose As Boolean
+    Dim NoncerPath As String
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -17,6 +18,10 @@ Public Class Form1
         'Load Persistent properties
         txtLocation.Text = My.Settings.ExecutableLocation
         If txtLocation.Text = "" Or Not File.Exists(txtLocation.Text) Then Get_Executable_Location()
+        NoncerPath = Path.GetDirectoryName(txtLocation.Text)
+
+        'Load configuration file
+        Load_Configuration()
 
         'Set timer intervals
         timCheckStatus.Interval = 1000
@@ -41,7 +46,7 @@ Public Class Form1
         Dim StartInfo As ProcessStartInfo = New ProcessStartInfo
 
         StartInfo.FileName = txtLocation.Text
-        StartInfo.WorkingDirectory = Path.GetDirectoryName(txtLocation.Text)
+        StartInfo.WorkingDirectory = NoncerPath
         StartInfo.RedirectStandardOutput = True
         StartInfo.RedirectStandardError = True
         StartInfo.UseShellExecute = False
@@ -86,6 +91,7 @@ Public Class Form1
             timProcessOutput.Enabled = True
             NotifyIcon.Icon = My.Resources.MiningGreen1
             NotifyIcon.Text = "NoncerPro Running"
+            Me.Icon = My.Resources.MiningGreen1
         Else
             pbxStatus.Image = My.Resources.MiningRed
             Running = False
@@ -95,6 +101,7 @@ Public Class Form1
             timProcessOutput.Enabled = False
             NotifyIcon.Icon = My.Resources.MiningRed1
             NotifyIcon.Text = "NoncerPro Stopped"
+            Me.Icon = My.Resources.MiningRed1
         End If
 
     End Sub
@@ -145,8 +152,8 @@ Public Class Form1
 
         If OutputQueue.Count > 0 Then
             OutputQueue.TryDequeue(LastLine)
-            LastLine = LastLine.Replace("[32minfo[39m", " info  ")
-            LastLine = LastLine.Replace("[33mwarn[39m", " warn  ")
+            LastLine = LastLine.Replace("[32minfo[39m", " info ")
+            LastLine = LastLine.Replace("[33mwarn[39m", " warn ")
             LastLine = LastLine.Replace("[31merror[39m", " error ")
             txtOutput.AppendText(LastLine + Environment.NewLine)
             Process_Output(LastLine)
@@ -158,7 +165,7 @@ Public Class Form1
 
         Dim Key As String
 
-        Key = Data.Substring(31, 5)
+        Key = Data.Substring(30, 5)
 
         Select Case Key
             Case "New B"
@@ -179,21 +186,21 @@ Public Class Form1
 
     Private Sub Update_Block_Height(Data As String)
 
-        Dim BlockHeight As String = Data.Substring(49)
+        Dim BlockHeight As String = Data.Substring(48)
         txtBlockHeight.Text = BlockHeight
 
     End Sub
 
     Private Sub Update_Difficulty(Data As String)
 
-        Dim Difficulty As String = Data.Substring(51)
+        Dim Difficulty As String = Data.Substring(50)
         txtDifficulty.Text = Difficulty
 
     End Sub
 
     Private Sub Update_Hashrate(Data As String)
 
-        Dim Hashrate() As String = Data.Substring(47).Split(" ")
+        Dim Hashrate() As String = Data.Substring(46).Split(" ")
         lblHashRate.Text = "Hash rate (" + Hashrate(1) + ")"
         txtHashrate.Text = Hashrate(0)
 
@@ -201,7 +208,7 @@ Public Class Form1
 
     Private Sub Update_Pool_Balance(Data As String)
 
-        Dim PoolBalance() As String = Data.Substring(45).Split(" ")
+        Dim PoolBalance() As String = Data.Substring(44).Split(" ")
         lblPoolBalance.Text = "Pool Balance (" + PoolBalance(1) + ")"
         lblConfirmedPoolBalance.Text = "Confirmed Pool Balance (" + PoolBalance(1) + ")"
         txtPoolBalance.Text = PoolBalance(0)
@@ -253,6 +260,44 @@ Public Class Form1
     Private Sub btnLocation_Click(sender As Object, e As EventArgs) Handles btnLocation.Click
 
         Get_Executable_Location()
+
+    End Sub
+
+    Private Sub Load_Configuration()
+
+        'Loader the configuration from the config file into the application
+        Dim ConfigFile As String
+        Dim ConfigLine() As String
+
+        ConfigFile = NoncerPath + "\miner.conf"
+
+        If File.Exists(ConfigFile) Then
+            ConfigLine = File.ReadAllLines(ConfigFile)
+            txtConfigAddress.Text = ConfigLine(1).Substring(12).Replace(""",", "")
+            txtConfigName.Text = ConfigLine(2).Substring(9).Replace(""",", "")
+            txtConfigServer.Text = ConfigLine(3).Substring(11).Replace("',", "")
+            txtConfigPort.Text = ConfigLine(4).Substring(8).Replace(",", "")
+            txtConfigDevices.Text = ConfigLine(5).Substring(11).Replace(",", "")
+            txtConfigThreads.Text = ConfigLine(6).Substring(11).Replace(",", "")
+            txtConfigBatchsize.Text = ConfigLine(7).Substring(13).Replace(",", "")
+            If ConfigLine(8).Substring(7).Replace(",", "") = True Then
+                chkConfigAPI.Checked = True
+            Else
+                chkConfigAPI.Checked = False
+            End If
+            txtConfigAPIport.Text = ConfigLine(9).Substring(11).Replace(",", "")
+            If ConfigLine(10).Substring(13).Replace(",", "") = True Then
+                chkConfigOptimizer.Checked = True
+            Else
+                chkConfigOptimizer.Checked = False
+            End If
+            txtConfigDifficulty.Text = ConfigLine(11).Substring(14).Replace(",", "")
+            If ConfigLine(12).Substring(16).Replace(",", "") = True Then
+                chkConfigAutoOptimise.Checked = True
+            Else
+                chkConfigAutoOptimise.Checked = False
+            End If
+        End If
 
     End Sub
 

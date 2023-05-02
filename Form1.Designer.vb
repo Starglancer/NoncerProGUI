@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Form1
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class Form1
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
@@ -34,8 +34,42 @@ Partial Class Form1
         Me.pbxStatus = New System.Windows.Forms.PictureBox()
         Me.btnStop = New System.Windows.Forms.Button()
         Me.btnStart = New System.Windows.Forms.Button()
+        Me.tabStatistics = New System.Windows.Forms.TabPage()
+        Me.txtConfirmedPoolBalance = New System.Windows.Forms.TextBox()
+        Me.lblConfirmedPoolBalance = New System.Windows.Forms.Label()
+        Me.txtPoolBalance = New System.Windows.Forms.TextBox()
+        Me.lblPoolBalance = New System.Windows.Forms.Label()
+        Me.txtHashrate = New System.Windows.Forms.TextBox()
+        Me.lblHashRate = New System.Windows.Forms.Label()
+        Me.txtDifficulty = New System.Windows.Forms.TextBox()
+        Me.lblDifficulty = New System.Windows.Forms.Label()
+        Me.txtBlockHeight = New System.Windows.Forms.TextBox()
+        Me.lblBlockHeight = New System.Windows.Forms.Label()
         Me.tabOutput = New System.Windows.Forms.TabPage()
         Me.txtOutput = New System.Windows.Forms.TextBox()
+        Me.tabConfig = New System.Windows.Forms.TabPage()
+        Me.chkConfigAPI = New System.Windows.Forms.CheckBox()
+        Me.txtConfigDevices = New System.Windows.Forms.TextBox()
+        Me.lblConfigDevices = New System.Windows.Forms.Label()
+        Me.txtConfigThreads = New System.Windows.Forms.TextBox()
+        Me.lblConfigThreads = New System.Windows.Forms.Label()
+        Me.txtConfigBatchsize = New System.Windows.Forms.TextBox()
+        Me.lblConfigBatchsize = New System.Windows.Forms.Label()
+        Me.lblConfigAPI = New System.Windows.Forms.Label()
+        Me.txtConfigAPIport = New System.Windows.Forms.TextBox()
+        Me.lblAPIPort = New System.Windows.Forms.Label()
+        Me.lblConfigOptimizer = New System.Windows.Forms.Label()
+        Me.txtConfigDifficulty = New System.Windows.Forms.TextBox()
+        Me.lblConfigDifficulty = New System.Windows.Forms.Label()
+        Me.lblConfigAutooptimise = New System.Windows.Forms.Label()
+        Me.txtConfigPort = New System.Windows.Forms.TextBox()
+        Me.lblConfigPort = New System.Windows.Forms.Label()
+        Me.txtConfigServer = New System.Windows.Forms.TextBox()
+        Me.lblConfigServer = New System.Windows.Forms.Label()
+        Me.txtConfigName = New System.Windows.Forms.TextBox()
+        Me.lblConfigName = New System.Windows.Forms.Label()
+        Me.txtConfigAddress = New System.Windows.Forms.TextBox()
+        Me.lblConfigAddress = New System.Windows.Forms.Label()
         Me.tabSettings = New System.Windows.Forms.TabPage()
         Me.gbxNoncerPro = New System.Windows.Forms.GroupBox()
         Me.btnLocation = New System.Windows.Forms.Button()
@@ -47,25 +81,17 @@ Partial Class Form1
         Me.NotifyIconMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnuExit = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExecutableDialog = New System.Windows.Forms.OpenFileDialog()
-        Me.tabStatistics = New System.Windows.Forms.TabPage()
-        Me.lblBlockHeight = New System.Windows.Forms.Label()
-        Me.txtBlockHeight = New System.Windows.Forms.TextBox()
-        Me.txtDifficulty = New System.Windows.Forms.TextBox()
-        Me.lblDifficulty = New System.Windows.Forms.Label()
-        Me.txtHashrate = New System.Windows.Forms.TextBox()
-        Me.lblHashRate = New System.Windows.Forms.Label()
-        Me.txtPoolBalance = New System.Windows.Forms.TextBox()
-        Me.lblPoolBalance = New System.Windows.Forms.Label()
-        Me.txtConfirmedPoolBalance = New System.Windows.Forms.TextBox()
-        Me.lblConfirmedPoolBalance = New System.Windows.Forms.Label()
+        Me.chkConfigOptimizer = New System.Windows.Forms.CheckBox()
+        Me.chkConfigAutoOptimise = New System.Windows.Forms.CheckBox()
         Me.TabControl.SuspendLayout()
         Me.tabStatus.SuspendLayout()
         CType(Me.pbxStatus, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tabStatistics.SuspendLayout()
         Me.tabOutput.SuspendLayout()
+        Me.tabConfig.SuspendLayout()
         Me.tabSettings.SuspendLayout()
         Me.gbxNoncerPro.SuspendLayout()
         Me.NotifyIconMenu.SuspendLayout()
-        Me.tabStatistics.SuspendLayout()
         Me.SuspendLayout()
         '
         'MiningProcess
@@ -83,6 +109,7 @@ Partial Class Form1
         Me.TabControl.Controls.Add(Me.tabStatus)
         Me.TabControl.Controls.Add(Me.tabStatistics)
         Me.TabControl.Controls.Add(Me.tabOutput)
+        Me.TabControl.Controls.Add(Me.tabConfig)
         Me.TabControl.Controls.Add(Me.tabSettings)
         Me.TabControl.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl.Location = New System.Drawing.Point(0, 0)
@@ -177,6 +204,122 @@ Partial Class Form1
         Me.btnStart.Text = "Start Miner"
         Me.btnStart.UseVisualStyleBackColor = True
         '
+        'tabStatistics
+        '
+        Me.tabStatistics.Controls.Add(Me.txtConfirmedPoolBalance)
+        Me.tabStatistics.Controls.Add(Me.lblConfirmedPoolBalance)
+        Me.tabStatistics.Controls.Add(Me.txtPoolBalance)
+        Me.tabStatistics.Controls.Add(Me.lblPoolBalance)
+        Me.tabStatistics.Controls.Add(Me.txtHashrate)
+        Me.tabStatistics.Controls.Add(Me.lblHashRate)
+        Me.tabStatistics.Controls.Add(Me.txtDifficulty)
+        Me.tabStatistics.Controls.Add(Me.lblDifficulty)
+        Me.tabStatistics.Controls.Add(Me.txtBlockHeight)
+        Me.tabStatistics.Controls.Add(Me.lblBlockHeight)
+        Me.tabStatistics.Location = New System.Drawing.Point(4, 22)
+        Me.tabStatistics.Name = "tabStatistics"
+        Me.tabStatistics.Size = New System.Drawing.Size(792, 424)
+        Me.tabStatistics.TabIndex = 3
+        Me.tabStatistics.Text = "Statistics"
+        Me.tabStatistics.UseVisualStyleBackColor = True
+        '
+        'txtConfirmedPoolBalance
+        '
+        Me.txtConfirmedPoolBalance.BackColor = System.Drawing.Color.White
+        Me.txtConfirmedPoolBalance.Location = New System.Drawing.Point(354, 163)
+        Me.txtConfirmedPoolBalance.Name = "txtConfirmedPoolBalance"
+        Me.txtConfirmedPoolBalance.ReadOnly = True
+        Me.txtConfirmedPoolBalance.Size = New System.Drawing.Size(100, 20)
+        Me.txtConfirmedPoolBalance.TabIndex = 9
+        Me.txtConfirmedPoolBalance.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'lblConfirmedPoolBalance
+        '
+        Me.lblConfirmedPoolBalance.Location = New System.Drawing.Point(176, 166)
+        Me.lblConfirmedPoolBalance.Name = "lblConfirmedPoolBalance"
+        Me.lblConfirmedPoolBalance.Size = New System.Drawing.Size(172, 13)
+        Me.lblConfirmedPoolBalance.TabIndex = 8
+        Me.lblConfirmedPoolBalance.Text = "Confirmed Pool Balance"
+        Me.lblConfirmedPoolBalance.TextAlign = System.Drawing.ContentAlignment.TopRight
+        '
+        'txtPoolBalance
+        '
+        Me.txtPoolBalance.BackColor = System.Drawing.Color.White
+        Me.txtPoolBalance.Location = New System.Drawing.Point(354, 128)
+        Me.txtPoolBalance.Name = "txtPoolBalance"
+        Me.txtPoolBalance.ReadOnly = True
+        Me.txtPoolBalance.Size = New System.Drawing.Size(100, 20)
+        Me.txtPoolBalance.TabIndex = 7
+        Me.txtPoolBalance.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'lblPoolBalance
+        '
+        Me.lblPoolBalance.Location = New System.Drawing.Point(213, 131)
+        Me.lblPoolBalance.Name = "lblPoolBalance"
+        Me.lblPoolBalance.Size = New System.Drawing.Size(135, 13)
+        Me.lblPoolBalance.TabIndex = 6
+        Me.lblPoolBalance.Text = "Pool Balance"
+        Me.lblPoolBalance.TextAlign = System.Drawing.ContentAlignment.TopRight
+        '
+        'txtHashrate
+        '
+        Me.txtHashrate.BackColor = System.Drawing.Color.White
+        Me.txtHashrate.Location = New System.Drawing.Point(354, 92)
+        Me.txtHashrate.Name = "txtHashrate"
+        Me.txtHashrate.ReadOnly = True
+        Me.txtHashrate.Size = New System.Drawing.Size(100, 20)
+        Me.txtHashrate.TabIndex = 5
+        Me.txtHashrate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'lblHashRate
+        '
+        Me.lblHashRate.Location = New System.Drawing.Point(238, 95)
+        Me.lblHashRate.Name = "lblHashRate"
+        Me.lblHashRate.Size = New System.Drawing.Size(110, 13)
+        Me.lblHashRate.TabIndex = 4
+        Me.lblHashRate.Text = "Hash Rate"
+        Me.lblHashRate.TextAlign = System.Drawing.ContentAlignment.TopRight
+        '
+        'txtDifficulty
+        '
+        Me.txtDifficulty.BackColor = System.Drawing.Color.White
+        Me.txtDifficulty.Location = New System.Drawing.Point(354, 56)
+        Me.txtDifficulty.Name = "txtDifficulty"
+        Me.txtDifficulty.ReadOnly = True
+        Me.txtDifficulty.Size = New System.Drawing.Size(100, 20)
+        Me.txtDifficulty.TabIndex = 3
+        Me.txtDifficulty.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'lblDifficulty
+        '
+        Me.lblDifficulty.AutoSize = True
+        Me.lblDifficulty.Location = New System.Drawing.Point(301, 59)
+        Me.lblDifficulty.Name = "lblDifficulty"
+        Me.lblDifficulty.Size = New System.Drawing.Size(47, 13)
+        Me.lblDifficulty.TabIndex = 2
+        Me.lblDifficulty.Text = "Difficulty"
+        Me.lblDifficulty.TextAlign = System.Drawing.ContentAlignment.TopRight
+        '
+        'txtBlockHeight
+        '
+        Me.txtBlockHeight.BackColor = System.Drawing.Color.White
+        Me.txtBlockHeight.Location = New System.Drawing.Point(354, 21)
+        Me.txtBlockHeight.Name = "txtBlockHeight"
+        Me.txtBlockHeight.ReadOnly = True
+        Me.txtBlockHeight.Size = New System.Drawing.Size(100, 20)
+        Me.txtBlockHeight.TabIndex = 1
+        Me.txtBlockHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'lblBlockHeight
+        '
+        Me.lblBlockHeight.AutoSize = True
+        Me.lblBlockHeight.Location = New System.Drawing.Point(280, 24)
+        Me.lblBlockHeight.Name = "lblBlockHeight"
+        Me.lblBlockHeight.Size = New System.Drawing.Size(68, 13)
+        Me.lblBlockHeight.TabIndex = 0
+        Me.lblBlockHeight.Text = "Block Height"
+        Me.lblBlockHeight.TextAlign = System.Drawing.ContentAlignment.TopRight
+        '
         'tabOutput
         '
         Me.tabOutput.Controls.Add(Me.txtOutput)
@@ -198,6 +341,240 @@ Partial Class Form1
         Me.txtOutput.ScrollBars = System.Windows.Forms.ScrollBars.Both
         Me.txtOutput.Size = New System.Drawing.Size(769, 405)
         Me.txtOutput.TabIndex = 0
+        '
+        'tabConfig
+        '
+        Me.tabConfig.Controls.Add(Me.chkConfigAutoOptimise)
+        Me.tabConfig.Controls.Add(Me.chkConfigOptimizer)
+        Me.tabConfig.Controls.Add(Me.chkConfigAPI)
+        Me.tabConfig.Controls.Add(Me.txtConfigDevices)
+        Me.tabConfig.Controls.Add(Me.lblConfigDevices)
+        Me.tabConfig.Controls.Add(Me.txtConfigThreads)
+        Me.tabConfig.Controls.Add(Me.lblConfigThreads)
+        Me.tabConfig.Controls.Add(Me.txtConfigBatchsize)
+        Me.tabConfig.Controls.Add(Me.lblConfigBatchsize)
+        Me.tabConfig.Controls.Add(Me.lblConfigAPI)
+        Me.tabConfig.Controls.Add(Me.txtConfigAPIport)
+        Me.tabConfig.Controls.Add(Me.lblAPIPort)
+        Me.tabConfig.Controls.Add(Me.lblConfigOptimizer)
+        Me.tabConfig.Controls.Add(Me.txtConfigDifficulty)
+        Me.tabConfig.Controls.Add(Me.lblConfigDifficulty)
+        Me.tabConfig.Controls.Add(Me.lblConfigAutooptimise)
+        Me.tabConfig.Controls.Add(Me.txtConfigPort)
+        Me.tabConfig.Controls.Add(Me.lblConfigPort)
+        Me.tabConfig.Controls.Add(Me.txtConfigServer)
+        Me.tabConfig.Controls.Add(Me.lblConfigServer)
+        Me.tabConfig.Controls.Add(Me.txtConfigName)
+        Me.tabConfig.Controls.Add(Me.lblConfigName)
+        Me.tabConfig.Controls.Add(Me.txtConfigAddress)
+        Me.tabConfig.Controls.Add(Me.lblConfigAddress)
+        Me.tabConfig.Location = New System.Drawing.Point(4, 22)
+        Me.tabConfig.Name = "tabConfig"
+        Me.tabConfig.Size = New System.Drawing.Size(792, 424)
+        Me.tabConfig.TabIndex = 4
+        Me.tabConfig.Text = "Config"
+        Me.tabConfig.UseVisualStyleBackColor = True
+        '
+        'chkConfigAPI
+        '
+        Me.chkConfigAPI.AutoSize = True
+        Me.chkConfigAPI.Location = New System.Drawing.Point(275, 217)
+        Me.chkConfigAPI.Name = "chkConfigAPI"
+        Me.chkConfigAPI.Size = New System.Drawing.Size(15, 14)
+        Me.chkConfigAPI.TabIndex = 24
+        Me.chkConfigAPI.UseVisualStyleBackColor = True
+        '
+        'txtConfigDevices
+        '
+        Me.txtConfigDevices.Location = New System.Drawing.Point(275, 135)
+        Me.txtConfigDevices.Name = "txtConfigDevices"
+        Me.txtConfigDevices.Size = New System.Drawing.Size(77, 20)
+        Me.txtConfigDevices.TabIndex = 23
+        Me.txtConfigDevices.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'lblConfigDevices
+        '
+        Me.lblConfigDevices.AutoSize = True
+        Me.lblConfigDevices.Location = New System.Drawing.Point(223, 138)
+        Me.lblConfigDevices.Name = "lblConfigDevices"
+        Me.lblConfigDevices.Size = New System.Drawing.Size(46, 13)
+        Me.lblConfigDevices.TabIndex = 22
+        Me.lblConfigDevices.Text = "Devices"
+        Me.lblConfigDevices.TextAlign = System.Drawing.ContentAlignment.TopRight
+        '
+        'txtConfigThreads
+        '
+        Me.txtConfigThreads.Location = New System.Drawing.Point(275, 161)
+        Me.txtConfigThreads.Name = "txtConfigThreads"
+        Me.txtConfigThreads.Size = New System.Drawing.Size(77, 20)
+        Me.txtConfigThreads.TabIndex = 21
+        Me.txtConfigThreads.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'lblConfigThreads
+        '
+        Me.lblConfigThreads.AutoSize = True
+        Me.lblConfigThreads.Location = New System.Drawing.Point(223, 164)
+        Me.lblConfigThreads.Name = "lblConfigThreads"
+        Me.lblConfigThreads.Size = New System.Drawing.Size(46, 13)
+        Me.lblConfigThreads.TabIndex = 20
+        Me.lblConfigThreads.Text = "Threads"
+        Me.lblConfigThreads.TextAlign = System.Drawing.ContentAlignment.TopRight
+        '
+        'txtConfigBatchsize
+        '
+        Me.txtConfigBatchsize.Location = New System.Drawing.Point(275, 189)
+        Me.txtConfigBatchsize.Name = "txtConfigBatchsize"
+        Me.txtConfigBatchsize.Size = New System.Drawing.Size(77, 20)
+        Me.txtConfigBatchsize.TabIndex = 19
+        Me.txtConfigBatchsize.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'lblConfigBatchsize
+        '
+        Me.lblConfigBatchsize.AutoSize = True
+        Me.lblConfigBatchsize.Location = New System.Drawing.Point(216, 192)
+        Me.lblConfigBatchsize.Name = "lblConfigBatchsize"
+        Me.lblConfigBatchsize.Size = New System.Drawing.Size(53, 13)
+        Me.lblConfigBatchsize.TabIndex = 18
+        Me.lblConfigBatchsize.Text = "Batchsize"
+        Me.lblConfigBatchsize.TextAlign = System.Drawing.ContentAlignment.TopRight
+        '
+        'lblConfigAPI
+        '
+        Me.lblConfigAPI.AutoSize = True
+        Me.lblConfigAPI.Location = New System.Drawing.Point(245, 218)
+        Me.lblConfigAPI.Name = "lblConfigAPI"
+        Me.lblConfigAPI.Size = New System.Drawing.Size(24, 13)
+        Me.lblConfigAPI.TabIndex = 16
+        Me.lblConfigAPI.Text = "API"
+        Me.lblConfigAPI.TextAlign = System.Drawing.ContentAlignment.TopRight
+        '
+        'txtConfigAPIport
+        '
+        Me.txtConfigAPIport.Location = New System.Drawing.Point(275, 241)
+        Me.txtConfigAPIport.Name = "txtConfigAPIport"
+        Me.txtConfigAPIport.Size = New System.Drawing.Size(77, 20)
+        Me.txtConfigAPIport.TabIndex = 15
+        Me.txtConfigAPIport.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'lblAPIPort
+        '
+        Me.lblAPIPort.AutoSize = True
+        Me.lblAPIPort.Location = New System.Drawing.Point(223, 244)
+        Me.lblAPIPort.Name = "lblAPIPort"
+        Me.lblAPIPort.Size = New System.Drawing.Size(46, 13)
+        Me.lblAPIPort.TabIndex = 14
+        Me.lblAPIPort.Text = "API Port"
+        Me.lblAPIPort.TextAlign = System.Drawing.ContentAlignment.TopRight
+        '
+        'lblConfigOptimizer
+        '
+        Me.lblConfigOptimizer.AutoSize = True
+        Me.lblConfigOptimizer.Location = New System.Drawing.Point(219, 270)
+        Me.lblConfigOptimizer.Name = "lblConfigOptimizer"
+        Me.lblConfigOptimizer.Size = New System.Drawing.Size(50, 13)
+        Me.lblConfigOptimizer.TabIndex = 12
+        Me.lblConfigOptimizer.Text = "Optimizer"
+        Me.lblConfigOptimizer.TextAlign = System.Drawing.ContentAlignment.TopRight
+        '
+        'txtConfigDifficulty
+        '
+        Me.txtConfigDifficulty.Location = New System.Drawing.Point(275, 293)
+        Me.txtConfigDifficulty.Name = "txtConfigDifficulty"
+        Me.txtConfigDifficulty.Size = New System.Drawing.Size(77, 20)
+        Me.txtConfigDifficulty.TabIndex = 11
+        Me.txtConfigDifficulty.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'lblConfigDifficulty
+        '
+        Me.lblConfigDifficulty.AutoSize = True
+        Me.lblConfigDifficulty.Location = New System.Drawing.Point(222, 296)
+        Me.lblConfigDifficulty.Name = "lblConfigDifficulty"
+        Me.lblConfigDifficulty.Size = New System.Drawing.Size(47, 13)
+        Me.lblConfigDifficulty.TabIndex = 10
+        Me.lblConfigDifficulty.Text = "Difficulty"
+        Me.lblConfigDifficulty.TextAlign = System.Drawing.ContentAlignment.TopRight
+        '
+        'lblConfigAutooptimise
+        '
+        Me.lblConfigAutooptimise.AutoSize = True
+        Me.lblConfigAutooptimise.Location = New System.Drawing.Point(197, 322)
+        Me.lblConfigAutooptimise.Name = "lblConfigAutooptimise"
+        Me.lblConfigAutooptimise.Size = New System.Drawing.Size(72, 13)
+        Me.lblConfigAutooptimise.TabIndex = 8
+        Me.lblConfigAutooptimise.Text = "Auto Optimise"
+        Me.lblConfigAutooptimise.TextAlign = System.Drawing.ContentAlignment.TopRight
+        '
+        'txtConfigPort
+        '
+        Me.txtConfigPort.Location = New System.Drawing.Point(275, 109)
+        Me.txtConfigPort.Name = "txtConfigPort"
+        Me.txtConfigPort.Size = New System.Drawing.Size(77, 20)
+        Me.txtConfigPort.TabIndex = 7
+        Me.txtConfigPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'lblConfigPort
+        '
+        Me.lblConfigPort.AutoSize = True
+        Me.lblConfigPort.Location = New System.Drawing.Point(243, 112)
+        Me.lblConfigPort.Name = "lblConfigPort"
+        Me.lblConfigPort.Size = New System.Drawing.Size(26, 13)
+        Me.lblConfigPort.TabIndex = 6
+        Me.lblConfigPort.Text = "Port"
+        Me.lblConfigPort.TextAlign = System.Drawing.ContentAlignment.TopRight
+        '
+        'txtConfigServer
+        '
+        Me.txtConfigServer.Location = New System.Drawing.Point(275, 83)
+        Me.txtConfigServer.Name = "txtConfigServer"
+        Me.txtConfigServer.Size = New System.Drawing.Size(187, 20)
+        Me.txtConfigServer.TabIndex = 5
+        Me.txtConfigServer.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'lblConfigServer
+        '
+        Me.lblConfigServer.AutoSize = True
+        Me.lblConfigServer.Location = New System.Drawing.Point(231, 86)
+        Me.lblConfigServer.Name = "lblConfigServer"
+        Me.lblConfigServer.Size = New System.Drawing.Size(38, 13)
+        Me.lblConfigServer.TabIndex = 4
+        Me.lblConfigServer.Text = "Server"
+        Me.lblConfigServer.TextAlign = System.Drawing.ContentAlignment.TopRight
+        '
+        'txtConfigName
+        '
+        Me.txtConfigName.Location = New System.Drawing.Point(275, 57)
+        Me.txtConfigName.Name = "txtConfigName"
+        Me.txtConfigName.Size = New System.Drawing.Size(187, 20)
+        Me.txtConfigName.TabIndex = 3
+        Me.txtConfigName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'lblConfigName
+        '
+        Me.lblConfigName.AutoSize = True
+        Me.lblConfigName.Location = New System.Drawing.Point(234, 57)
+        Me.lblConfigName.Name = "lblConfigName"
+        Me.lblConfigName.Size = New System.Drawing.Size(35, 13)
+        Me.lblConfigName.TabIndex = 2
+        Me.lblConfigName.Text = "Name"
+        Me.lblConfigName.TextAlign = System.Drawing.ContentAlignment.TopRight
+        '
+        'txtConfigAddress
+        '
+        Me.txtConfigAddress.Location = New System.Drawing.Point(275, 31)
+        Me.txtConfigAddress.Name = "txtConfigAddress"
+        Me.txtConfigAddress.Size = New System.Drawing.Size(337, 20)
+        Me.txtConfigAddress.TabIndex = 1
+        Me.txtConfigAddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'lblConfigAddress
+        '
+        Me.lblConfigAddress.AutoSize = True
+        Me.lblConfigAddress.Location = New System.Drawing.Point(224, 34)
+        Me.lblConfigAddress.Name = "lblConfigAddress"
+        Me.lblConfigAddress.Size = New System.Drawing.Size(45, 13)
+        Me.lblConfigAddress.TabIndex = 0
+        Me.lblConfigAddress.Text = "Address"
+        Me.lblConfigAddress.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'tabSettings
         '
@@ -275,121 +652,23 @@ Partial Class Form1
         '
         Me.ExecutableDialog.Title = "Specify NoncerPro Location"
         '
-        'tabStatistics
+        'chkConfigOptimizer
         '
-        Me.tabStatistics.Controls.Add(Me.txtConfirmedPoolBalance)
-        Me.tabStatistics.Controls.Add(Me.lblConfirmedPoolBalance)
-        Me.tabStatistics.Controls.Add(Me.txtPoolBalance)
-        Me.tabStatistics.Controls.Add(Me.lblPoolBalance)
-        Me.tabStatistics.Controls.Add(Me.txtHashrate)
-        Me.tabStatistics.Controls.Add(Me.lblHashRate)
-        Me.tabStatistics.Controls.Add(Me.txtDifficulty)
-        Me.tabStatistics.Controls.Add(Me.lblDifficulty)
-        Me.tabStatistics.Controls.Add(Me.txtBlockHeight)
-        Me.tabStatistics.Controls.Add(Me.lblBlockHeight)
-        Me.tabStatistics.Location = New System.Drawing.Point(4, 22)
-        Me.tabStatistics.Name = "tabStatistics"
-        Me.tabStatistics.Size = New System.Drawing.Size(792, 424)
-        Me.tabStatistics.TabIndex = 3
-        Me.tabStatistics.Text = "Statistics"
-        Me.tabStatistics.UseVisualStyleBackColor = True
+        Me.chkConfigOptimizer.AutoSize = True
+        Me.chkConfigOptimizer.Location = New System.Drawing.Point(275, 269)
+        Me.chkConfigOptimizer.Name = "chkConfigOptimizer"
+        Me.chkConfigOptimizer.Size = New System.Drawing.Size(15, 14)
+        Me.chkConfigOptimizer.TabIndex = 25
+        Me.chkConfigOptimizer.UseVisualStyleBackColor = True
         '
-        'lblBlockHeight
+        'chkConfigAutoOptimise
         '
-        Me.lblBlockHeight.AutoSize = True
-        Me.lblBlockHeight.Location = New System.Drawing.Point(280, 24)
-        Me.lblBlockHeight.Name = "lblBlockHeight"
-        Me.lblBlockHeight.Size = New System.Drawing.Size(68, 13)
-        Me.lblBlockHeight.TabIndex = 0
-        Me.lblBlockHeight.Text = "Block Height"
-        Me.lblBlockHeight.TextAlign = System.Drawing.ContentAlignment.TopRight
-        '
-        'txtBlockHeight
-        '
-        Me.txtBlockHeight.BackColor = System.Drawing.Color.White
-        Me.txtBlockHeight.Location = New System.Drawing.Point(354, 21)
-        Me.txtBlockHeight.Name = "txtBlockHeight"
-        Me.txtBlockHeight.ReadOnly = True
-        Me.txtBlockHeight.Size = New System.Drawing.Size(100, 20)
-        Me.txtBlockHeight.TabIndex = 1
-        Me.txtBlockHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'txtDifficulty
-        '
-        Me.txtDifficulty.BackColor = System.Drawing.Color.White
-        Me.txtDifficulty.Location = New System.Drawing.Point(354, 56)
-        Me.txtDifficulty.Name = "txtDifficulty"
-        Me.txtDifficulty.ReadOnly = True
-        Me.txtDifficulty.Size = New System.Drawing.Size(100, 20)
-        Me.txtDifficulty.TabIndex = 3
-        Me.txtDifficulty.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'lblDifficulty
-        '
-        Me.lblDifficulty.AutoSize = True
-        Me.lblDifficulty.Location = New System.Drawing.Point(301, 59)
-        Me.lblDifficulty.Name = "lblDifficulty"
-        Me.lblDifficulty.Size = New System.Drawing.Size(47, 13)
-        Me.lblDifficulty.TabIndex = 2
-        Me.lblDifficulty.Text = "Difficulty"
-        Me.lblDifficulty.TextAlign = System.Drawing.ContentAlignment.TopRight
-        '
-        'txtHashrate
-        '
-        Me.txtHashrate.BackColor = System.Drawing.Color.White
-        Me.txtHashrate.Location = New System.Drawing.Point(354, 92)
-        Me.txtHashrate.Name = "txtHashrate"
-        Me.txtHashrate.ReadOnly = True
-        Me.txtHashrate.Size = New System.Drawing.Size(100, 20)
-        Me.txtHashrate.TabIndex = 5
-        Me.txtHashrate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'lblHashRate
-        '
-        Me.lblHashRate.Location = New System.Drawing.Point(238, 95)
-        Me.lblHashRate.Name = "lblHashRate"
-        Me.lblHashRate.Size = New System.Drawing.Size(110, 13)
-        Me.lblHashRate.TabIndex = 4
-        Me.lblHashRate.Text = "Hash Rate"
-        Me.lblHashRate.TextAlign = System.Drawing.ContentAlignment.TopRight
-        '
-        'txtPoolBalance
-        '
-        Me.txtPoolBalance.BackColor = System.Drawing.Color.White
-        Me.txtPoolBalance.Location = New System.Drawing.Point(354, 128)
-        Me.txtPoolBalance.Name = "txtPoolBalance"
-        Me.txtPoolBalance.ReadOnly = True
-        Me.txtPoolBalance.Size = New System.Drawing.Size(100, 20)
-        Me.txtPoolBalance.TabIndex = 7
-        Me.txtPoolBalance.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'lblPoolBalance
-        '
-        Me.lblPoolBalance.Location = New System.Drawing.Point(213, 131)
-        Me.lblPoolBalance.Name = "lblPoolBalance"
-        Me.lblPoolBalance.Size = New System.Drawing.Size(135, 13)
-        Me.lblPoolBalance.TabIndex = 6
-        Me.lblPoolBalance.Text = "Pool Balance"
-        Me.lblPoolBalance.TextAlign = System.Drawing.ContentAlignment.TopRight
-        '
-        'txtConfirmedPoolBalance
-        '
-        Me.txtConfirmedPoolBalance.BackColor = System.Drawing.Color.White
-        Me.txtConfirmedPoolBalance.Location = New System.Drawing.Point(354, 163)
-        Me.txtConfirmedPoolBalance.Name = "txtConfirmedPoolBalance"
-        Me.txtConfirmedPoolBalance.ReadOnly = True
-        Me.txtConfirmedPoolBalance.Size = New System.Drawing.Size(100, 20)
-        Me.txtConfirmedPoolBalance.TabIndex = 9
-        Me.txtConfirmedPoolBalance.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'lblConfirmedPoolBalance
-        '
-        Me.lblConfirmedPoolBalance.Location = New System.Drawing.Point(176, 166)
-        Me.lblConfirmedPoolBalance.Name = "lblConfirmedPoolBalance"
-        Me.lblConfirmedPoolBalance.Size = New System.Drawing.Size(172, 13)
-        Me.lblConfirmedPoolBalance.TabIndex = 8
-        Me.lblConfirmedPoolBalance.Text = "Confirmed Pool Balance"
-        Me.lblConfirmedPoolBalance.TextAlign = System.Drawing.ContentAlignment.TopRight
+        Me.chkConfigAutoOptimise.AutoSize = True
+        Me.chkConfigAutoOptimise.Location = New System.Drawing.Point(275, 322)
+        Me.chkConfigAutoOptimise.Name = "chkConfigAutoOptimise"
+        Me.chkConfigAutoOptimise.Size = New System.Drawing.Size(15, 14)
+        Me.chkConfigAutoOptimise.TabIndex = 26
+        Me.chkConfigAutoOptimise.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -407,14 +686,16 @@ Partial Class Form1
         Me.tabStatus.ResumeLayout(False)
         Me.tabStatus.PerformLayout()
         CType(Me.pbxStatus, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tabStatistics.ResumeLayout(False)
+        Me.tabStatistics.PerformLayout()
         Me.tabOutput.ResumeLayout(False)
         Me.tabOutput.PerformLayout()
+        Me.tabConfig.ResumeLayout(False)
+        Me.tabConfig.PerformLayout()
         Me.tabSettings.ResumeLayout(False)
         Me.gbxNoncerPro.ResumeLayout(False)
         Me.gbxNoncerPro.PerformLayout()
         Me.NotifyIconMenu.ResumeLayout(False)
-        Me.tabStatistics.ResumeLayout(False)
-        Me.tabStatistics.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -452,4 +733,29 @@ Partial Class Form1
     Friend WithEvents lblConfirmedPoolBalance As Label
     Friend WithEvents txtPoolBalance As TextBox
     Friend WithEvents lblPoolBalance As Label
+    Friend WithEvents tabConfig As TabPage
+    Friend WithEvents txtConfigAddress As TextBox
+    Friend WithEvents lblConfigAddress As Label
+    Friend WithEvents txtConfigName As TextBox
+    Friend WithEvents lblConfigName As Label
+    Friend WithEvents txtConfigServer As TextBox
+    Friend WithEvents lblConfigServer As Label
+    Friend WithEvents txtConfigPort As TextBox
+    Friend WithEvents lblConfigPort As Label
+    Friend WithEvents chkConfigAPI As CheckBox
+    Friend WithEvents txtConfigDevices As TextBox
+    Friend WithEvents lblConfigDevices As Label
+    Friend WithEvents txtConfigThreads As TextBox
+    Friend WithEvents lblConfigThreads As Label
+    Friend WithEvents txtConfigBatchsize As TextBox
+    Friend WithEvents lblConfigBatchsize As Label
+    Friend WithEvents lblConfigAPI As Label
+    Friend WithEvents txtConfigAPIport As TextBox
+    Friend WithEvents lblAPIPort As Label
+    Friend WithEvents lblConfigOptimizer As Label
+    Friend WithEvents txtConfigDifficulty As TextBox
+    Friend WithEvents lblConfigDifficulty As Label
+    Friend WithEvents lblConfigAutooptimise As Label
+    Friend WithEvents chkConfigOptimizer As CheckBox
+    Friend WithEvents chkConfigAutoOptimise As CheckBox
 End Class
