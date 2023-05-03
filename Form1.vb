@@ -23,8 +23,6 @@ Public Class Form1
         'Load configuration file
         Load_Configuration()
 
-        Save_Configuration()
-
         'Set timer intervals
         timCheckStatus.Interval = 1000
         timProcessOutput.Interval = 1000
@@ -45,6 +43,12 @@ Public Class Form1
 
     Private Sub btnStart_Click(sender As Object, e As EventArgs) Handles btnStart.Click
 
+        Start_miner()
+
+    End Sub
+
+    Private Sub Start_miner()
+
         Dim StartInfo As ProcessStartInfo = New ProcessStartInfo
 
         StartInfo.FileName = txtLocation.Text
@@ -63,6 +67,12 @@ Public Class Form1
     End Sub
 
     Private Sub btnStop_Click(sender As Object, e As EventArgs) Handles btnStop.Click
+
+        Stop_Miner()
+
+    End Sub
+
+    Private Sub Stop_Miner()
 
         MiningProcess.Kill()
         Update_Status("stopped")
@@ -250,9 +260,6 @@ Public Class Form1
         'Save persistent settings
         My.Settings.ExecutableLocation = txtLocation.Text
 
-        'Save configuration
-        Save_Configuration()
-
     End Sub
 
     Private Sub Get_Executable_Location()
@@ -346,6 +353,24 @@ Public Class Form1
         Config += "}" + Environment.NewLine
 
         File.AppendAllText(ConfigFile, Config)
+
+    End Sub
+
+    Private Sub btnConfigSave_Click(sender As Object, e As EventArgs) Handles btnConfigSave.Click
+
+        Save_Configuration()
+
+        If Running = True Then
+            Stop_Miner()
+            System.Threading.Thread.Sleep(1000)
+            Start_miner()
+        End If
+
+    End Sub
+
+    Private Sub btnConfigCancel_Click(sender As Object, e As EventArgs) Handles btnConfigCancel.Click
+
+        Load_Configuration()
 
     End Sub
 

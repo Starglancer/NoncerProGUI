@@ -48,6 +48,8 @@ Partial Class Form1
         Me.tabOutput = New System.Windows.Forms.TabPage()
         Me.txtOutput = New System.Windows.Forms.TextBox()
         Me.tabConfig = New System.Windows.Forms.TabPage()
+        Me.chkConfigAutoOptimise = New System.Windows.Forms.CheckBox()
+        Me.chkConfigOptimizer = New System.Windows.Forms.CheckBox()
         Me.chkConfigAPI = New System.Windows.Forms.CheckBox()
         Me.txtConfigDevices = New System.Windows.Forms.TextBox()
         Me.lblConfigDevices = New System.Windows.Forms.Label()
@@ -81,8 +83,9 @@ Partial Class Form1
         Me.NotifyIconMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnuExit = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExecutableDialog = New System.Windows.Forms.OpenFileDialog()
-        Me.chkConfigOptimizer = New System.Windows.Forms.CheckBox()
-        Me.chkConfigAutoOptimise = New System.Windows.Forms.CheckBox()
+        Me.btnConfigSave = New System.Windows.Forms.Button()
+        Me.btnConfigCancel = New System.Windows.Forms.Button()
+        Me.lblWarning = New System.Windows.Forms.Label()
         Me.TabControl.SuspendLayout()
         Me.tabStatus.SuspendLayout()
         CType(Me.pbxStatus, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -120,6 +123,7 @@ Partial Class Form1
         '
         'tabStatus
         '
+        Me.tabStatus.BackColor = System.Drawing.Color.Transparent
         Me.tabStatus.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.tabStatus.Controls.Add(Me.btnDownload)
         Me.tabStatus.Controls.Add(Me.lblStarglancer)
@@ -134,7 +138,6 @@ Partial Class Form1
         Me.tabStatus.Size = New System.Drawing.Size(792, 424)
         Me.tabStatus.TabIndex = 0
         Me.tabStatus.Text = "Status"
-        Me.tabStatus.UseVisualStyleBackColor = True
         '
         'btnDownload
         '
@@ -206,6 +209,7 @@ Partial Class Form1
         '
         'tabStatistics
         '
+        Me.tabStatistics.BackColor = System.Drawing.Color.Transparent
         Me.tabStatistics.Controls.Add(Me.txtConfirmedPoolBalance)
         Me.tabStatistics.Controls.Add(Me.lblConfirmedPoolBalance)
         Me.tabStatistics.Controls.Add(Me.txtPoolBalance)
@@ -221,7 +225,6 @@ Partial Class Form1
         Me.tabStatistics.Size = New System.Drawing.Size(792, 424)
         Me.tabStatistics.TabIndex = 3
         Me.tabStatistics.Text = "Statistics"
-        Me.tabStatistics.UseVisualStyleBackColor = True
         '
         'txtConfirmedPoolBalance
         '
@@ -322,13 +325,13 @@ Partial Class Form1
         '
         'tabOutput
         '
+        Me.tabOutput.BackColor = System.Drawing.Color.Transparent
         Me.tabOutput.Controls.Add(Me.txtOutput)
         Me.tabOutput.Location = New System.Drawing.Point(4, 22)
         Me.tabOutput.Name = "tabOutput"
         Me.tabOutput.Size = New System.Drawing.Size(792, 424)
         Me.tabOutput.TabIndex = 1
         Me.tabOutput.Text = "Output"
-        Me.tabOutput.UseVisualStyleBackColor = True
         '
         'txtOutput
         '
@@ -344,6 +347,10 @@ Partial Class Form1
         '
         'tabConfig
         '
+        Me.tabConfig.BackColor = System.Drawing.Color.Transparent
+        Me.tabConfig.Controls.Add(Me.lblWarning)
+        Me.tabConfig.Controls.Add(Me.btnConfigCancel)
+        Me.tabConfig.Controls.Add(Me.btnConfigSave)
         Me.tabConfig.Controls.Add(Me.chkConfigAutoOptimise)
         Me.tabConfig.Controls.Add(Me.chkConfigOptimizer)
         Me.tabConfig.Controls.Add(Me.chkConfigAPI)
@@ -373,12 +380,29 @@ Partial Class Form1
         Me.tabConfig.Size = New System.Drawing.Size(792, 424)
         Me.tabConfig.TabIndex = 4
         Me.tabConfig.Text = "Config"
-        Me.tabConfig.UseVisualStyleBackColor = True
+        '
+        'chkConfigAutoOptimise
+        '
+        Me.chkConfigAutoOptimise.AutoSize = True
+        Me.chkConfigAutoOptimise.Location = New System.Drawing.Point(267, 341)
+        Me.chkConfigAutoOptimise.Name = "chkConfigAutoOptimise"
+        Me.chkConfigAutoOptimise.Size = New System.Drawing.Size(15, 14)
+        Me.chkConfigAutoOptimise.TabIndex = 26
+        Me.chkConfigAutoOptimise.UseVisualStyleBackColor = True
+        '
+        'chkConfigOptimizer
+        '
+        Me.chkConfigOptimizer.AutoSize = True
+        Me.chkConfigOptimizer.Location = New System.Drawing.Point(267, 288)
+        Me.chkConfigOptimizer.Name = "chkConfigOptimizer"
+        Me.chkConfigOptimizer.Size = New System.Drawing.Size(15, 14)
+        Me.chkConfigOptimizer.TabIndex = 25
+        Me.chkConfigOptimizer.UseVisualStyleBackColor = True
         '
         'chkConfigAPI
         '
         Me.chkConfigAPI.AutoSize = True
-        Me.chkConfigAPI.Location = New System.Drawing.Point(275, 217)
+        Me.chkConfigAPI.Location = New System.Drawing.Point(267, 236)
         Me.chkConfigAPI.Name = "chkConfigAPI"
         Me.chkConfigAPI.Size = New System.Drawing.Size(15, 14)
         Me.chkConfigAPI.TabIndex = 24
@@ -386,7 +410,7 @@ Partial Class Form1
         '
         'txtConfigDevices
         '
-        Me.txtConfigDevices.Location = New System.Drawing.Point(275, 135)
+        Me.txtConfigDevices.Location = New System.Drawing.Point(267, 154)
         Me.txtConfigDevices.Name = "txtConfigDevices"
         Me.txtConfigDevices.Size = New System.Drawing.Size(77, 20)
         Me.txtConfigDevices.TabIndex = 23
@@ -395,7 +419,7 @@ Partial Class Form1
         'lblConfigDevices
         '
         Me.lblConfigDevices.AutoSize = True
-        Me.lblConfigDevices.Location = New System.Drawing.Point(223, 138)
+        Me.lblConfigDevices.Location = New System.Drawing.Point(215, 157)
         Me.lblConfigDevices.Name = "lblConfigDevices"
         Me.lblConfigDevices.Size = New System.Drawing.Size(46, 13)
         Me.lblConfigDevices.TabIndex = 22
@@ -404,7 +428,7 @@ Partial Class Form1
         '
         'txtConfigThreads
         '
-        Me.txtConfigThreads.Location = New System.Drawing.Point(275, 161)
+        Me.txtConfigThreads.Location = New System.Drawing.Point(267, 180)
         Me.txtConfigThreads.Name = "txtConfigThreads"
         Me.txtConfigThreads.Size = New System.Drawing.Size(77, 20)
         Me.txtConfigThreads.TabIndex = 21
@@ -413,7 +437,7 @@ Partial Class Form1
         'lblConfigThreads
         '
         Me.lblConfigThreads.AutoSize = True
-        Me.lblConfigThreads.Location = New System.Drawing.Point(223, 164)
+        Me.lblConfigThreads.Location = New System.Drawing.Point(215, 183)
         Me.lblConfigThreads.Name = "lblConfigThreads"
         Me.lblConfigThreads.Size = New System.Drawing.Size(46, 13)
         Me.lblConfigThreads.TabIndex = 20
@@ -422,7 +446,7 @@ Partial Class Form1
         '
         'txtConfigBatchsize
         '
-        Me.txtConfigBatchsize.Location = New System.Drawing.Point(275, 189)
+        Me.txtConfigBatchsize.Location = New System.Drawing.Point(267, 208)
         Me.txtConfigBatchsize.Name = "txtConfigBatchsize"
         Me.txtConfigBatchsize.Size = New System.Drawing.Size(77, 20)
         Me.txtConfigBatchsize.TabIndex = 19
@@ -431,7 +455,7 @@ Partial Class Form1
         'lblConfigBatchsize
         '
         Me.lblConfigBatchsize.AutoSize = True
-        Me.lblConfigBatchsize.Location = New System.Drawing.Point(216, 192)
+        Me.lblConfigBatchsize.Location = New System.Drawing.Point(208, 211)
         Me.lblConfigBatchsize.Name = "lblConfigBatchsize"
         Me.lblConfigBatchsize.Size = New System.Drawing.Size(53, 13)
         Me.lblConfigBatchsize.TabIndex = 18
@@ -441,7 +465,7 @@ Partial Class Form1
         'lblConfigAPI
         '
         Me.lblConfigAPI.AutoSize = True
-        Me.lblConfigAPI.Location = New System.Drawing.Point(245, 218)
+        Me.lblConfigAPI.Location = New System.Drawing.Point(237, 237)
         Me.lblConfigAPI.Name = "lblConfigAPI"
         Me.lblConfigAPI.Size = New System.Drawing.Size(24, 13)
         Me.lblConfigAPI.TabIndex = 16
@@ -450,7 +474,7 @@ Partial Class Form1
         '
         'txtConfigAPIport
         '
-        Me.txtConfigAPIport.Location = New System.Drawing.Point(275, 241)
+        Me.txtConfigAPIport.Location = New System.Drawing.Point(267, 260)
         Me.txtConfigAPIport.Name = "txtConfigAPIport"
         Me.txtConfigAPIport.Size = New System.Drawing.Size(77, 20)
         Me.txtConfigAPIport.TabIndex = 15
@@ -459,7 +483,7 @@ Partial Class Form1
         'lblAPIPort
         '
         Me.lblAPIPort.AutoSize = True
-        Me.lblAPIPort.Location = New System.Drawing.Point(223, 244)
+        Me.lblAPIPort.Location = New System.Drawing.Point(215, 263)
         Me.lblAPIPort.Name = "lblAPIPort"
         Me.lblAPIPort.Size = New System.Drawing.Size(46, 13)
         Me.lblAPIPort.TabIndex = 14
@@ -469,7 +493,7 @@ Partial Class Form1
         'lblConfigOptimizer
         '
         Me.lblConfigOptimizer.AutoSize = True
-        Me.lblConfigOptimizer.Location = New System.Drawing.Point(219, 270)
+        Me.lblConfigOptimizer.Location = New System.Drawing.Point(211, 289)
         Me.lblConfigOptimizer.Name = "lblConfigOptimizer"
         Me.lblConfigOptimizer.Size = New System.Drawing.Size(50, 13)
         Me.lblConfigOptimizer.TabIndex = 12
@@ -478,7 +502,7 @@ Partial Class Form1
         '
         'txtConfigDifficulty
         '
-        Me.txtConfigDifficulty.Location = New System.Drawing.Point(275, 293)
+        Me.txtConfigDifficulty.Location = New System.Drawing.Point(267, 312)
         Me.txtConfigDifficulty.Name = "txtConfigDifficulty"
         Me.txtConfigDifficulty.Size = New System.Drawing.Size(77, 20)
         Me.txtConfigDifficulty.TabIndex = 11
@@ -487,7 +511,7 @@ Partial Class Form1
         'lblConfigDifficulty
         '
         Me.lblConfigDifficulty.AutoSize = True
-        Me.lblConfigDifficulty.Location = New System.Drawing.Point(222, 296)
+        Me.lblConfigDifficulty.Location = New System.Drawing.Point(214, 315)
         Me.lblConfigDifficulty.Name = "lblConfigDifficulty"
         Me.lblConfigDifficulty.Size = New System.Drawing.Size(47, 13)
         Me.lblConfigDifficulty.TabIndex = 10
@@ -497,7 +521,7 @@ Partial Class Form1
         'lblConfigAutooptimise
         '
         Me.lblConfigAutooptimise.AutoSize = True
-        Me.lblConfigAutooptimise.Location = New System.Drawing.Point(197, 322)
+        Me.lblConfigAutooptimise.Location = New System.Drawing.Point(189, 341)
         Me.lblConfigAutooptimise.Name = "lblConfigAutooptimise"
         Me.lblConfigAutooptimise.Size = New System.Drawing.Size(72, 13)
         Me.lblConfigAutooptimise.TabIndex = 8
@@ -506,7 +530,7 @@ Partial Class Form1
         '
         'txtConfigPort
         '
-        Me.txtConfigPort.Location = New System.Drawing.Point(275, 109)
+        Me.txtConfigPort.Location = New System.Drawing.Point(267, 128)
         Me.txtConfigPort.Name = "txtConfigPort"
         Me.txtConfigPort.Size = New System.Drawing.Size(77, 20)
         Me.txtConfigPort.TabIndex = 7
@@ -515,7 +539,7 @@ Partial Class Form1
         'lblConfigPort
         '
         Me.lblConfigPort.AutoSize = True
-        Me.lblConfigPort.Location = New System.Drawing.Point(243, 112)
+        Me.lblConfigPort.Location = New System.Drawing.Point(235, 131)
         Me.lblConfigPort.Name = "lblConfigPort"
         Me.lblConfigPort.Size = New System.Drawing.Size(26, 13)
         Me.lblConfigPort.TabIndex = 6
@@ -524,7 +548,7 @@ Partial Class Form1
         '
         'txtConfigServer
         '
-        Me.txtConfigServer.Location = New System.Drawing.Point(275, 83)
+        Me.txtConfigServer.Location = New System.Drawing.Point(267, 102)
         Me.txtConfigServer.Name = "txtConfigServer"
         Me.txtConfigServer.Size = New System.Drawing.Size(187, 20)
         Me.txtConfigServer.TabIndex = 5
@@ -533,7 +557,7 @@ Partial Class Form1
         'lblConfigServer
         '
         Me.lblConfigServer.AutoSize = True
-        Me.lblConfigServer.Location = New System.Drawing.Point(231, 86)
+        Me.lblConfigServer.Location = New System.Drawing.Point(223, 105)
         Me.lblConfigServer.Name = "lblConfigServer"
         Me.lblConfigServer.Size = New System.Drawing.Size(38, 13)
         Me.lblConfigServer.TabIndex = 4
@@ -542,7 +566,7 @@ Partial Class Form1
         '
         'txtConfigName
         '
-        Me.txtConfigName.Location = New System.Drawing.Point(275, 57)
+        Me.txtConfigName.Location = New System.Drawing.Point(267, 76)
         Me.txtConfigName.Name = "txtConfigName"
         Me.txtConfigName.Size = New System.Drawing.Size(187, 20)
         Me.txtConfigName.TabIndex = 3
@@ -551,7 +575,7 @@ Partial Class Form1
         'lblConfigName
         '
         Me.lblConfigName.AutoSize = True
-        Me.lblConfigName.Location = New System.Drawing.Point(234, 57)
+        Me.lblConfigName.Location = New System.Drawing.Point(226, 76)
         Me.lblConfigName.Name = "lblConfigName"
         Me.lblConfigName.Size = New System.Drawing.Size(35, 13)
         Me.lblConfigName.TabIndex = 2
@@ -560,7 +584,7 @@ Partial Class Form1
         '
         'txtConfigAddress
         '
-        Me.txtConfigAddress.Location = New System.Drawing.Point(275, 31)
+        Me.txtConfigAddress.Location = New System.Drawing.Point(267, 50)
         Me.txtConfigAddress.Name = "txtConfigAddress"
         Me.txtConfigAddress.Size = New System.Drawing.Size(337, 20)
         Me.txtConfigAddress.TabIndex = 1
@@ -569,7 +593,7 @@ Partial Class Form1
         'lblConfigAddress
         '
         Me.lblConfigAddress.AutoSize = True
-        Me.lblConfigAddress.Location = New System.Drawing.Point(224, 34)
+        Me.lblConfigAddress.Location = New System.Drawing.Point(216, 53)
         Me.lblConfigAddress.Name = "lblConfigAddress"
         Me.lblConfigAddress.Size = New System.Drawing.Size(45, 13)
         Me.lblConfigAddress.TabIndex = 0
@@ -578,13 +602,13 @@ Partial Class Form1
         '
         'tabSettings
         '
+        Me.tabSettings.BackColor = System.Drawing.Color.Transparent
         Me.tabSettings.Controls.Add(Me.gbxNoncerPro)
         Me.tabSettings.Location = New System.Drawing.Point(4, 22)
         Me.tabSettings.Name = "tabSettings"
         Me.tabSettings.Size = New System.Drawing.Size(792, 424)
         Me.tabSettings.TabIndex = 2
         Me.tabSettings.Text = "GUI Settings"
-        Me.tabSettings.UseVisualStyleBackColor = True
         '
         'gbxNoncerPro
         '
@@ -652,23 +676,32 @@ Partial Class Form1
         '
         Me.ExecutableDialog.Title = "Specify NoncerPro Location"
         '
-        'chkConfigOptimizer
+        'btnConfigSave
         '
-        Me.chkConfigOptimizer.AutoSize = True
-        Me.chkConfigOptimizer.Location = New System.Drawing.Point(275, 269)
-        Me.chkConfigOptimizer.Name = "chkConfigOptimizer"
-        Me.chkConfigOptimizer.Size = New System.Drawing.Size(15, 14)
-        Me.chkConfigOptimizer.TabIndex = 25
-        Me.chkConfigOptimizer.UseVisualStyleBackColor = True
+        Me.btnConfigSave.Location = New System.Drawing.Point(217, 377)
+        Me.btnConfigSave.Name = "btnConfigSave"
+        Me.btnConfigSave.Size = New System.Drawing.Size(75, 23)
+        Me.btnConfigSave.TabIndex = 27
+        Me.btnConfigSave.Text = "Save"
+        Me.btnConfigSave.UseVisualStyleBackColor = True
         '
-        'chkConfigAutoOptimise
+        'btnConfigCancel
         '
-        Me.chkConfigAutoOptimise.AutoSize = True
-        Me.chkConfigAutoOptimise.Location = New System.Drawing.Point(275, 322)
-        Me.chkConfigAutoOptimise.Name = "chkConfigAutoOptimise"
-        Me.chkConfigAutoOptimise.Size = New System.Drawing.Size(15, 14)
-        Me.chkConfigAutoOptimise.TabIndex = 26
-        Me.chkConfigAutoOptimise.UseVisualStyleBackColor = True
+        Me.btnConfigCancel.Location = New System.Drawing.Point(461, 377)
+        Me.btnConfigCancel.Name = "btnConfigCancel"
+        Me.btnConfigCancel.Size = New System.Drawing.Size(75, 23)
+        Me.btnConfigCancel.TabIndex = 28
+        Me.btnConfigCancel.Text = "Cancel"
+        Me.btnConfigCancel.UseVisualStyleBackColor = True
+        '
+        'lblWarning
+        '
+        Me.lblWarning.AutoSize = True
+        Me.lblWarning.Location = New System.Drawing.Point(264, 17)
+        Me.lblWarning.Name = "lblWarning"
+        Me.lblWarning.Size = New System.Drawing.Size(263, 13)
+        Me.lblWarning.TabIndex = 29
+        Me.lblWarning.Text = "Saving any configuration changes will restart the miner"
         '
         'Form1
         '
@@ -758,4 +791,7 @@ Partial Class Form1
     Friend WithEvents lblConfigAutooptimise As Label
     Friend WithEvents chkConfigOptimizer As CheckBox
     Friend WithEvents chkConfigAutoOptimise As CheckBox
+    Friend WithEvents btnConfigCancel As Button
+    Friend WithEvents btnConfigSave As Button
+    Friend WithEvents lblWarning As Label
 End Class
