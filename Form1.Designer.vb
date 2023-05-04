@@ -48,6 +48,9 @@ Partial Class Form1
         Me.tabOutput = New System.Windows.Forms.TabPage()
         Me.txtOutput = New System.Windows.Forms.TextBox()
         Me.tabConfig = New System.Windows.Forms.TabPage()
+        Me.lblWarning = New System.Windows.Forms.Label()
+        Me.btnConfigCancel = New System.Windows.Forms.Button()
+        Me.btnConfigSave = New System.Windows.Forms.Button()
         Me.chkConfigAutoOptimise = New System.Windows.Forms.CheckBox()
         Me.chkConfigOptimizer = New System.Windows.Forms.CheckBox()
         Me.chkConfigAPI = New System.Windows.Forms.CheckBox()
@@ -83,9 +86,9 @@ Partial Class Form1
         Me.NotifyIconMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnuExit = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExecutableDialog = New System.Windows.Forms.OpenFileDialog()
-        Me.btnConfigSave = New System.Windows.Forms.Button()
-        Me.btnConfigCancel = New System.Windows.Forms.Button()
-        Me.lblWarning = New System.Windows.Forms.Label()
+        Me.gbxErrorLog = New System.Windows.Forms.GroupBox()
+        Me.txtError = New System.Windows.Forms.TextBox()
+        Me.btnClearLog = New System.Windows.Forms.Button()
         Me.TabControl.SuspendLayout()
         Me.tabStatus.SuspendLayout()
         CType(Me.pbxStatus, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -95,6 +98,7 @@ Partial Class Form1
         Me.tabSettings.SuspendLayout()
         Me.gbxNoncerPro.SuspendLayout()
         Me.NotifyIconMenu.SuspendLayout()
+        Me.gbxErrorLog.SuspendLayout()
         Me.SuspendLayout()
         '
         'MiningProcess
@@ -381,6 +385,33 @@ Partial Class Form1
         Me.tabConfig.TabIndex = 4
         Me.tabConfig.Text = "Config"
         '
+        'lblWarning
+        '
+        Me.lblWarning.AutoSize = True
+        Me.lblWarning.Location = New System.Drawing.Point(264, 17)
+        Me.lblWarning.Name = "lblWarning"
+        Me.lblWarning.Size = New System.Drawing.Size(263, 13)
+        Me.lblWarning.TabIndex = 29
+        Me.lblWarning.Text = "Saving any configuration changes will restart the miner"
+        '
+        'btnConfigCancel
+        '
+        Me.btnConfigCancel.Location = New System.Drawing.Point(461, 377)
+        Me.btnConfigCancel.Name = "btnConfigCancel"
+        Me.btnConfigCancel.Size = New System.Drawing.Size(75, 23)
+        Me.btnConfigCancel.TabIndex = 28
+        Me.btnConfigCancel.Text = "Cancel"
+        Me.btnConfigCancel.UseVisualStyleBackColor = True
+        '
+        'btnConfigSave
+        '
+        Me.btnConfigSave.Location = New System.Drawing.Point(217, 377)
+        Me.btnConfigSave.Name = "btnConfigSave"
+        Me.btnConfigSave.Size = New System.Drawing.Size(75, 23)
+        Me.btnConfigSave.TabIndex = 27
+        Me.btnConfigSave.Text = "Save"
+        Me.btnConfigSave.UseVisualStyleBackColor = True
+        '
         'chkConfigAutoOptimise
         '
         Me.chkConfigAutoOptimise.AutoSize = True
@@ -603,6 +634,7 @@ Partial Class Form1
         'tabSettings
         '
         Me.tabSettings.BackColor = System.Drawing.Color.Transparent
+        Me.tabSettings.Controls.Add(Me.gbxErrorLog)
         Me.tabSettings.Controls.Add(Me.gbxNoncerPro)
         Me.tabSettings.Location = New System.Drawing.Point(4, 22)
         Me.tabSettings.Name = "tabSettings"
@@ -676,32 +708,36 @@ Partial Class Form1
         '
         Me.ExecutableDialog.Title = "Specify NoncerPro Location"
         '
-        'btnConfigSave
+        'gbxErrorLog
         '
-        Me.btnConfigSave.Location = New System.Drawing.Point(217, 377)
-        Me.btnConfigSave.Name = "btnConfigSave"
-        Me.btnConfigSave.Size = New System.Drawing.Size(75, 23)
-        Me.btnConfigSave.TabIndex = 27
-        Me.btnConfigSave.Text = "Save"
-        Me.btnConfigSave.UseVisualStyleBackColor = True
+        Me.gbxErrorLog.Controls.Add(Me.btnClearLog)
+        Me.gbxErrorLog.Controls.Add(Me.txtError)
+        Me.gbxErrorLog.Location = New System.Drawing.Point(15, 89)
+        Me.gbxErrorLog.Name = "gbxErrorLog"
+        Me.gbxErrorLog.Size = New System.Drawing.Size(763, 321)
+        Me.gbxErrorLog.TabIndex = 1
+        Me.gbxErrorLog.TabStop = False
+        Me.gbxErrorLog.Text = "Noncer Pro GUI Error Log"
         '
-        'btnConfigCancel
+        'txtError
         '
-        Me.btnConfigCancel.Location = New System.Drawing.Point(461, 377)
-        Me.btnConfigCancel.Name = "btnConfigCancel"
-        Me.btnConfigCancel.Size = New System.Drawing.Size(75, 23)
-        Me.btnConfigCancel.TabIndex = 28
-        Me.btnConfigCancel.Text = "Cancel"
-        Me.btnConfigCancel.UseVisualStyleBackColor = True
+        Me.txtError.BackColor = System.Drawing.Color.White
+        Me.txtError.Location = New System.Drawing.Point(9, 24)
+        Me.txtError.Multiline = True
+        Me.txtError.Name = "txtError"
+        Me.txtError.ReadOnly = True
+        Me.txtError.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txtError.Size = New System.Drawing.Size(744, 262)
+        Me.txtError.TabIndex = 0
         '
-        'lblWarning
+        'btnClearLog
         '
-        Me.lblWarning.AutoSize = True
-        Me.lblWarning.Location = New System.Drawing.Point(264, 17)
-        Me.lblWarning.Name = "lblWarning"
-        Me.lblWarning.Size = New System.Drawing.Size(263, 13)
-        Me.lblWarning.TabIndex = 29
-        Me.lblWarning.Text = "Saving any configuration changes will restart the miner"
+        Me.btnClearLog.Location = New System.Drawing.Point(347, 292)
+        Me.btnClearLog.Name = "btnClearLog"
+        Me.btnClearLog.Size = New System.Drawing.Size(75, 23)
+        Me.btnClearLog.TabIndex = 1
+        Me.btnClearLog.Text = "Clear"
+        Me.btnClearLog.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -729,6 +765,8 @@ Partial Class Form1
         Me.gbxNoncerPro.ResumeLayout(False)
         Me.gbxNoncerPro.PerformLayout()
         Me.NotifyIconMenu.ResumeLayout(False)
+        Me.gbxErrorLog.ResumeLayout(False)
+        Me.gbxErrorLog.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -794,4 +832,7 @@ Partial Class Form1
     Friend WithEvents btnConfigCancel As Button
     Friend WithEvents btnConfigSave As Button
     Friend WithEvents lblWarning As Label
+    Friend WithEvents gbxErrorLog As GroupBox
+    Friend WithEvents btnClearLog As Button
+    Friend WithEvents txtError As TextBox
 End Class

@@ -424,4 +424,35 @@ Public Class Form1
 
     End Sub
 
+    Private Sub Log_Error(ex As Exception)
+
+        Dim LogEntry As String
+
+        'Construct Log Entry
+        LogEntry = "----------------------------------------------"
+        LogEntry += Environment.NewLine
+        LogEntry += Date.Now.ToString("dd/MM/yyyy HH:mm:ss.fff")
+        LogEntry += Environment.NewLine
+        LogEntry += "----------------------------------------------"
+        LogEntry += Environment.NewLine
+        LogEntry += "Exception Message: " + ex.Message
+        LogEntry += Environment.NewLine
+        LogEntry += "StackTrace: " + ex.StackTrace
+        LogEntry += Environment.NewLine
+        LogEntry += "Source: " + ex.Source
+        LogEntry += Environment.NewLine
+        LogEntry += "TargetSite: " + ex.TargetSite.ToString
+        LogEntry += Environment.NewLine
+
+        'Write entry to log
+        txtError.AppendText(LogEntry)
+
+    End Sub
+
+    Private Sub btnClearLog_Click(sender As Object, e As EventArgs) Handles btnClearLog.Click
+
+        txtError.Text = ""
+
+    End Sub
+
 End Class
