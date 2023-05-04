@@ -5,7 +5,7 @@ Public Class Form1
 
     'Global Variables
     Dim Running As Boolean
-    Dim OutputQueue As ConcurrentQueue(Of String) = New ConcurrentQueue(Of String)
+    Dim OutputQueue As ConcurrentQueue(Of String)
     Dim ForceClose As Boolean
     Dim NoncerPath As String
 
@@ -62,6 +62,8 @@ Public Class Form1
         MiningProcess.BeginOutputReadLine()
         MiningProcess.BeginErrorReadLine()
 
+        OutputQueue = New ConcurrentQueue(Of String)
+
         Update_Status("running")
 
     End Sub
@@ -74,7 +76,23 @@ Public Class Form1
 
     Private Sub Stop_Miner()
 
-        MiningProcess.Kill()
+        Dim TestProcess() As Process
+
+        'Kill
+        Try
+            MiningProcess.Kill()
+        Catch
+        End Try
+
+        'And kill again to be sure
+        Try
+            TestProcess = Process.GetProcessesByName("noncerpro.exe")
+            For Each Process In TestProcess
+                Process.Kill()
+            Next
+        Catch
+        End Try
+
         Update_Status("stopped")
 
     End Sub
@@ -132,10 +150,8 @@ Public Class Form1
             e.Cancel = True
         Else
             'Genuine close event
-            Try
-                MiningProcess.Kill()
-            Catch
-            End Try
+            Stop_Miner()
+
         End If
 
     End Sub
@@ -277,45 +293,79 @@ Public Class Form1
 
     Private Sub Load_Configuration()
 
-        'Loader the configuration from the config file into the application
         Dim ConfigFile As String
-        Dim ConfigLine() As String
 
         ConfigFile = NoncerPath + "\miner.conf"
 
-        If File.Exists(ConfigFile) Then
-            ConfigLine = File.ReadAllLines(ConfigFile)
-            txtConfigAddress.Text = ConfigLine(1).Substring(12).Replace(""",", "")
-            txtConfigName.Text = ConfigLine(2).Substring(9).Replace(""",", "")
-            txtConfigServer.Text = ConfigLine(3).Substring(11).Replace("',", "")
-            txtConfigPort.Text = ConfigLine(4).Substring(8).Replace(",", "")
-            txtConfigDevices.Text = ConfigLine(5).Substring(11).Replace(",", "")
-            txtConfigThreads.Text = ConfigLine(6).Substring(11).Replace(",", "")
-            txtConfigBatchsize.Text = ConfigLine(7).Substring(13).Replace(",", "")
-            If ConfigLine(8).Substring(7).Replace(",", "") = "true" Then
-                chkConfigAPI.Checked = True
+        If File.Exists(ConfigFile + ".bak") Then
+            If File.Exists(ConfigFile) Then
+                Read_Configuration(ConfigFile)
             Else
-                chkConfigAPI.Checked = False
+                Load_Default_Config()
             End If
-            txtConfigAPIport.Text = ConfigLine(9).Substring(11).Replace(",", "")
-            If ConfigLine(10).Substring(13).Replace(",", "") = "true" Then
-                chkConfigOptimizer.Checked = True
+        Else
+            If File.Exists(ConfigFile) Then
+                File.Move(ConfigFile, ConfigFile + ".bak")
+                Load_Default_Config()
             Else
-                chkConfigOptimizer.Checked = False
-            End If
-            txtConfigDifficulty.Text = ConfigLine(11).Substring(14).Replace(",", "")
-            If ConfigLine(12).Substring(17).Replace(",", "") = "true" Then
-                chkConfigAutoOptimise.Checked = True
-            Else
-                chkConfigAutoOptimise.Checked = False
+                File.AppendAllText(ConfigFile + ".bak", "")
+                Load_Default_Config()
             End If
         End If
 
     End Sub
 
+    Private Sub Read_Configuration(ConfigFile As String)
+
+        Dim ConfigLine() As String
+
+        ConfigLine = File.ReadAllLines(ConfigFile)
+        txtConfigAddress.Text = ConfigLine(1).Substring(12).Replace(""",", "")
+        txtConfigName.Text = ConfigLine(2).Substring(9).Replace(""",", "")
+        txtConfigServer.Text = ConfigLine(3).Substring(11).Replace("',", "")
+        txtConfigPort.Text = ConfigLine(4).Substring(8).Replace(",", "")
+        txtConfigDevices.Text = ConfigLine(5).Substring(11).Replace(",", "")
+        txtConfigThreads.Text = ConfigLine(6).Substring(11).Replace(",", "")
+        txtConfigBatchsize.Text = ConfigLine(7).Substring(13).Replace(",", "")
+        If ConfigLine(8).Substring(7).Replace(",", "") = "true" Then
+            chkConfigAPI.Checked = True
+        Else
+            chkConfigAPI.Checked = False
+        End If
+        txtConfigAPIport.Text = ConfigLine(9).Substring(11).Replace(",", "")
+        If ConfigLine(10).Substring(13).Replace(",", "") = "true" Then
+            chkConfigOptimizer.Checked = True
+        Else
+            chkConfigOptimizer.Checked = False
+        End If
+        txtConfigDifficulty.Text = ConfigLine(11).Substring(14).Replace(",", "")
+        If ConfigLine(12).Substring(17).Replace(",", "") = "true" Then
+            chkConfigAutoOptimise.Checked = True
+        Else
+            chkConfigAutoOptimise.Checked = False
+        End If
+
+    End Sub
+
+    Private Sub Load_Default_Config()
+
+        txtConfigAddress.Text = ""
+        txtConfigName.Text = "Rig1"
+        txtConfigServer.Text = "eu.nimpool.io"
+        txtConfigPort.Text = "8444"
+        txtConfigDevices.Text = "0"
+        txtConfigThreads.Text = "2"
+        txtConfigBatchsize.Text = "92"
+        chkConfigAPI.Checked = True
+        txtConfigAPIport.Text = "3000"
+        chkConfigOptimizer.Checked = False
+        txtConfigDifficulty.Text = "32"
+        chkConfigAutoOptimise.Checked = True
+
+    End Sub
+
     Private Sub Save_Configuration()
 
-        'Loader the configuration from the config file into the application
         Dim ConfigFile As String
         Dim Config As String = ""
 
