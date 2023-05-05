@@ -9,10 +9,10 @@ Imports System.Runtime.InteropServices
 ' Review the values of the assembly attributes
 
 <Assembly: AssemblyTitle("NoncerProGUI")>
-<Assembly: AssemblyDescription("")>
-<Assembly: AssemblyCompany("AlienWare")>
+<Assembly: AssemblyDescription("Windows GUI for Noncer Pro Nvidia Nimiq Miner")>
+<Assembly: AssemblyCompany("Starglancer")>
 <Assembly: AssemblyProduct("NoncerProGUI")>
-<Assembly: AssemblyCopyright("Copyright © AlienWare 2023")>
+<Assembly: AssemblyCopyright("Copyright © Starglancer 2023")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
