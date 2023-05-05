@@ -265,7 +265,7 @@ Public Class Form1
         'Check if process is running and set status accordingly
         Try
             TestProcess = Process.GetProcessById(MiningProcess.Id)
-            RestartPoints += 1
+            If RestartPoints < 100 Then RestartPoints += 1
             Update_Status("running")
         Catch
             If RestartPoints > 60 Then
