@@ -14,6 +14,7 @@ Public Class Form1
     Dim MaxDataPointer As Integer
     Dim TrendDurationMinutes As Integer
     Dim UpdateIntervalSeconds As Integer
+    Dim RestartPoints As Integer
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -160,6 +161,9 @@ Public Class Form1
             'Update status
             Update_Status("running")
 
+            'Reset restart points
+            RestartPoints = 0
+
         Catch ex As Exception
             Log_Error(ex)
         End Try
@@ -210,19 +214,7 @@ Public Class Form1
 
     Private Sub Update_Status(status As String)
 
-        Dim TestProcess As Process
-
         Try
-            'Check if process is running and set status accordingly
-            If status = "check" Then
-                Try
-                    TestProcess = Process.GetProcessById(MiningProcess.Id)
-                    status = "running"
-                Catch
-                    status = "stopped"
-                End Try
-            End If
-
             'Update status
             If status = "running" Then
                 pbxStatus.Image = My.Resources.MiningGreen
@@ -258,10 +250,29 @@ Public Class Form1
     Private Sub timCheckStatus_Tick(sender As Object, e As EventArgs) Handles timCheckStatus.Tick
 
         Try
-            Update_Status("check")
+            Check_Status()
 
         Catch ex As Exception
             Log_Error(ex)
+        End Try
+
+    End Sub
+
+    Private Sub Check_Status()
+
+        Dim TestProcess As Process
+
+        'Check if process is running and set status accordingly
+        Try
+            TestProcess = Process.GetProcessById(MiningProcess.Id)
+            RestartPoints += 1
+            Update_Status("running")
+        Catch
+            If RestartPoints > 60 Then
+                Start_miner()
+            Else
+                Update_Status("stopped")
+            End If
         End Try
 
     End Sub
@@ -326,19 +337,24 @@ Public Class Form1
         Try
 
             If OutputQueue.Count > 0 Then
+
                 'Remove next output line from the queue for processing
                 OutputQueue.TryDequeue(LastLine)
 
-                'Remove colour code characters for neatness
-                LastLine = LastLine.Replace("[32minfo[39m", " info ")
-                LastLine = LastLine.Replace("[33mwarn[39m", " warn ")
-                LastLine = LastLine.Replace("[31merror[39m", " error ")
+                If Not LastLine Is Nothing Then
 
-                'Output data to output textbox
-                txtOutput.AppendText(LastLine + Environment.NewLine)
+                    'Remove colour code characters for neatness
+                    LastLine = LastLine.Replace("[32minfo[39m", " info ")
+                    LastLine = LastLine.Replace("[33mwarn[39m", " warn ")
+                    LastLine = LastLine.Replace("[31merror[39m", " error ")
 
-                'Do further processing of output
-                Process_Output(LastLine)
+                    'Output data to output textbox
+                    txtOutput.AppendText(LastLine + Environment.NewLine)
+
+                    'Do further processing of output
+                    Process_Output(LastLine)
+
+                End If
 
             End If
 
