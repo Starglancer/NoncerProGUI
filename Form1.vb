@@ -1,5 +1,6 @@
 ﻿Imports System.Collections.Concurrent
 Imports System.IO
+Imports System.Windows.Forms.DataVisualization.Charting
 
 Public Class Form1
 
@@ -8,6 +9,11 @@ Public Class Form1
     Dim OutputQueue As ConcurrentQueue(Of String)
     Dim ForceClose As Boolean
     Dim NoncerPath As String
+    Dim DataArray(,) As Decimal
+    Dim DataPointer As Integer
+    Dim MaxDataPointer As Integer
+    Dim TrendDurationMinutes As Integer
+    Dim UpdateIntervalSeconds As Integer
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -20,12 +26,28 @@ Public Class Form1
         If txtLocation.Text = "" Or Not File.Exists(txtLocation.Text) Then Get_Executable_Location()
         NoncerPath = Path.GetDirectoryName(txtLocation.Text)
 
+        'Set constants
+        TrendDurationMinutes = 60
+        UpdateIntervalSeconds = 10
+
+        'Initialise Data Capture for charts
+        DataPointer = 0
+        MaxDataPointer = Convert.ToInt32(TrendDurationMinutes * 60 / UpdateIntervalSeconds)
+        ReDim DataArray(MaxDataPointer + 1, 2)
+
+        'Configure hashrate chart
+        Configure_Hashrate_Chart()
+
+        'Configure balance chart
+        Configure_Balance_Chart()
+
         'Load configuration file
         Load_Configuration()
 
         'Set timer intervals
         timCheckStatus.Interval = 1000
         timProcessOutput.Interval = 1000
+        timUpdateChart.Interval = UpdateIntervalSeconds * 1000
 
         'Set Initial Status as stopped
         Update_Status("stopped")
@@ -38,6 +60,54 @@ Public Class Form1
 
         'Set force close flag to false
         ForceClose = False
+
+    End Sub
+
+    Private Sub Configure_Hashrate_Chart()
+
+        Try
+            With chtHashRate.ChartAreas(0)
+                .AxisX.Title = "Time (minutes)"
+                .AxisX.MajorGrid.LineColor = Color.Gainsboro
+                .AxisX.Minimum = 0
+                .AxisY.Title = "Hash Rate"
+                .AxisY.MajorGrid.LineColor = Color.Gainsboro
+                .AxisY.IsStartedFromZero = False
+                .BackColor = Color.White
+                .BorderColor = Color.Black
+                .BorderDashStyle = ChartDashStyle.Solid
+                .BorderWidth = 1
+            End With
+
+            chtHashRate.Series(0).IsVisibleInLegend = False
+
+        Catch ex As Exception
+            Log_Error(ex)
+        End Try
+
+    End Sub
+
+    Private Sub Configure_Balance_Chart()
+
+        Try
+            With chtBalance.ChartAreas(0)
+                .AxisX.Title = "Time (minutes)"
+                .AxisX.MajorGrid.LineColor = Color.Gainsboro
+                .AxisX.Minimum = 0
+                .AxisY.Title = "Pool Balance"
+                .AxisY.MajorGrid.LineColor = Color.Gainsboro
+                .AxisY.IsStartedFromZero = False
+                .BackColor = Color.White
+                .BorderColor = Color.Black
+                .BorderDashStyle = ChartDashStyle.Solid
+                .BorderWidth = 1
+            End With
+
+            chtBalance.Series(0).IsVisibleInLegend = False
+
+        Catch ex As Exception
+            Log_Error(ex)
+        End Try
 
     End Sub
 
@@ -119,6 +189,7 @@ Public Class Form1
             btnStop.Enabled = True
             timCheckStatus.Enabled = True
             timProcessOutput.Enabled = True
+            timUpdateChart.Enabled = True
             NotifyIcon.Icon = My.Resources.MiningGreen1
             NotifyIcon.Text = "NoncerPro Running"
             Me.Icon = My.Resources.MiningGreen1
@@ -129,6 +200,8 @@ Public Class Form1
             btnStop.Enabled = False
             timCheckStatus.Enabled = False
             timProcessOutput.Enabled = False
+            timUpdateChart.Enabled = False
+            txtConfirmedPoolBalance.Text = "0"
             NotifyIcon.Icon = My.Resources.MiningRed1
             NotifyIcon.Text = "NoncerPro Stopped"
             Me.Icon = My.Resources.MiningRed1
@@ -452,6 +525,66 @@ Public Class Form1
     Private Sub btnClearLog_Click(sender As Object, e As EventArgs) Handles btnClearLog.Click
 
         txtError.Text = ""
+
+    End Sub
+
+    Private Sub timUpdateChart_Tick(sender As Object, e As EventArgs) Handles timUpdateChart.Tick
+
+        If txtHashrate.Text <> "0" And txtPoolBalance.Text <> "0" Then
+
+            'Store current Hashrate
+            DataArray(DataPointer, 0) = Convert.ToDecimal(txtHashrate.Text)
+
+            'Display Hashrate Graph
+            chtHashRate.Series.Clear()
+            chtHashRate.Series.Add("Hash Rate")
+
+            With chtHashRate.Series(0)
+                .IsVisibleInLegend = False
+                .ChartType = DataVisualization.Charting.SeriesChartType.Line
+                .BorderWidth = 3
+                .Color = Color.DarkGray
+                .BorderDashStyle = ChartDashStyle.Solid
+
+                For N As Integer = 0 To DataPointer
+                    .Points.AddXY(N * UpdateIntervalSeconds / 60, DataArray(N, 0))
+                Next
+
+            End With
+
+            'Store current Balance
+            DataArray(DataPointer, 1) = Convert.ToDecimal(txtPoolBalance.Text)
+
+            'Display Balance Graph
+            chtBalance.Series.Clear()
+            chtBalance.Series.Add("Pool Balance")
+
+            With chtBalance.Series(0)
+                .IsVisibleInLegend = False
+                .ChartType = DataVisualization.Charting.SeriesChartType.Line
+                .BorderWidth = 3
+                .Color = Color.DarkGray
+                .BorderDashStyle = ChartDashStyle.Solid
+
+                For N As Integer = 0 To DataPointer
+                    .Points.AddXY(N * UpdateIntervalSeconds / 60, DataArray(N, 1))
+                Next
+
+            End With
+
+            'Increment pointer
+            DataPointer += 1
+
+            'Shift array contents once we reach maximum duration
+            If DataPointer > MaxDataPointer Then
+                DataPointer = MaxDataPointer
+                For N As Integer = 0 To MaxDataPointer - 1
+                    DataArray(N, 0) = DataArray(N + 1, 0)
+                    DataArray(N, 1) = DataArray(N + 1, 1)
+                Next
+            End If
+
+        End If
 
     End Sub
 

@@ -23,6 +23,12 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.MiningProcess = New System.Diagnostics.Process()
         Me.TabControl = New System.Windows.Forms.TabControl()
@@ -35,6 +41,8 @@ Partial Class Form1
         Me.btnStop = New System.Windows.Forms.Button()
         Me.btnStart = New System.Windows.Forms.Button()
         Me.tabStatistics = New System.Windows.Forms.TabPage()
+        Me.chtBalance = New System.Windows.Forms.DataVisualization.Charting.Chart()
+        Me.chtHashRate = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.txtConfirmedPoolBalance = New System.Windows.Forms.TextBox()
         Me.lblConfirmedPoolBalance = New System.Windows.Forms.Label()
         Me.txtPoolBalance = New System.Windows.Forms.TextBox()
@@ -76,6 +84,9 @@ Partial Class Form1
         Me.txtConfigAddress = New System.Windows.Forms.TextBox()
         Me.lblConfigAddress = New System.Windows.Forms.Label()
         Me.tabSettings = New System.Windows.Forms.TabPage()
+        Me.gbxErrorLog = New System.Windows.Forms.GroupBox()
+        Me.btnClearLog = New System.Windows.Forms.Button()
+        Me.txtError = New System.Windows.Forms.TextBox()
         Me.gbxNoncerPro = New System.Windows.Forms.GroupBox()
         Me.btnLocation = New System.Windows.Forms.Button()
         Me.txtLocation = New System.Windows.Forms.TextBox()
@@ -86,19 +97,19 @@ Partial Class Form1
         Me.NotifyIconMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnuExit = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExecutableDialog = New System.Windows.Forms.OpenFileDialog()
-        Me.gbxErrorLog = New System.Windows.Forms.GroupBox()
-        Me.txtError = New System.Windows.Forms.TextBox()
-        Me.btnClearLog = New System.Windows.Forms.Button()
+        Me.timUpdateChart = New System.Windows.Forms.Timer(Me.components)
         Me.TabControl.SuspendLayout()
         Me.tabStatus.SuspendLayout()
         CType(Me.pbxStatus, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabStatistics.SuspendLayout()
+        CType(Me.chtBalance, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.chtHashRate, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabOutput.SuspendLayout()
         Me.tabConfig.SuspendLayout()
         Me.tabSettings.SuspendLayout()
+        Me.gbxErrorLog.SuspendLayout()
         Me.gbxNoncerPro.SuspendLayout()
         Me.NotifyIconMenu.SuspendLayout()
-        Me.gbxErrorLog.SuspendLayout()
         Me.SuspendLayout()
         '
         'MiningProcess
@@ -214,6 +225,8 @@ Partial Class Form1
         'tabStatistics
         '
         Me.tabStatistics.BackColor = System.Drawing.Color.Transparent
+        Me.tabStatistics.Controls.Add(Me.chtBalance)
+        Me.tabStatistics.Controls.Add(Me.chtHashRate)
         Me.tabStatistics.Controls.Add(Me.txtConfirmedPoolBalance)
         Me.tabStatistics.Controls.Add(Me.lblConfirmedPoolBalance)
         Me.tabStatistics.Controls.Add(Me.txtPoolBalance)
@@ -230,21 +243,56 @@ Partial Class Form1
         Me.tabStatistics.TabIndex = 3
         Me.tabStatistics.Text = "Statistics"
         '
+        'chtBalance
+        '
+        Me.chtBalance.BackColor = System.Drawing.Color.Transparent
+        ChartArea1.Name = "ChartArea1"
+        Me.chtBalance.ChartAreas.Add(ChartArea1)
+        Legend1.Name = "Legend1"
+        Me.chtBalance.Legends.Add(Legend1)
+        Me.chtBalance.Location = New System.Drawing.Point(0, 242)
+        Me.chtBalance.Name = "chtBalance"
+        Series1.ChartArea = "ChartArea1"
+        Series1.Legend = "Legend1"
+        Series1.Name = "Series1"
+        Me.chtBalance.Series.Add(Series1)
+        Me.chtBalance.Size = New System.Drawing.Size(792, 179)
+        Me.chtBalance.TabIndex = 11
+        Me.chtBalance.Text = "Chart2"
+        '
+        'chtHashRate
+        '
+        Me.chtHashRate.BackColor = System.Drawing.Color.Transparent
+        ChartArea2.Name = "ChartArea1"
+        Me.chtHashRate.ChartAreas.Add(ChartArea2)
+        Legend2.Name = "Legend1"
+        Me.chtHashRate.Legends.Add(Legend2)
+        Me.chtHashRate.Location = New System.Drawing.Point(0, 60)
+        Me.chtHashRate.Name = "chtHashRate"
+        Series2.ChartArea = "ChartArea1"
+        Series2.Legend = "Legend1"
+        Series2.Name = "Series1"
+        Me.chtHashRate.Series.Add(Series2)
+        Me.chtHashRate.Size = New System.Drawing.Size(792, 185)
+        Me.chtHashRate.TabIndex = 10
+        Me.chtHashRate.Text = "Chart1"
+        '
         'txtConfirmedPoolBalance
         '
         Me.txtConfirmedPoolBalance.BackColor = System.Drawing.Color.White
-        Me.txtConfirmedPoolBalance.Location = New System.Drawing.Point(354, 163)
+        Me.txtConfirmedPoolBalance.Location = New System.Drawing.Point(412, 34)
         Me.txtConfirmedPoolBalance.Name = "txtConfirmedPoolBalance"
         Me.txtConfirmedPoolBalance.ReadOnly = True
         Me.txtConfirmedPoolBalance.Size = New System.Drawing.Size(100, 20)
         Me.txtConfirmedPoolBalance.TabIndex = 9
+        Me.txtConfirmedPoolBalance.Text = "0"
         Me.txtConfirmedPoolBalance.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'lblConfirmedPoolBalance
         '
-        Me.lblConfirmedPoolBalance.Location = New System.Drawing.Point(176, 166)
+        Me.lblConfirmedPoolBalance.Location = New System.Drawing.Point(248, 37)
         Me.lblConfirmedPoolBalance.Name = "lblConfirmedPoolBalance"
-        Me.lblConfirmedPoolBalance.Size = New System.Drawing.Size(172, 13)
+        Me.lblConfirmedPoolBalance.Size = New System.Drawing.Size(158, 13)
         Me.lblConfirmedPoolBalance.TabIndex = 8
         Me.lblConfirmedPoolBalance.Text = "Confirmed Pool Balance"
         Me.lblConfirmedPoolBalance.TextAlign = System.Drawing.ContentAlignment.TopRight
@@ -252,18 +300,19 @@ Partial Class Form1
         'txtPoolBalance
         '
         Me.txtPoolBalance.BackColor = System.Drawing.Color.White
-        Me.txtPoolBalance.Location = New System.Drawing.Point(354, 128)
+        Me.txtPoolBalance.Location = New System.Drawing.Point(129, 34)
         Me.txtPoolBalance.Name = "txtPoolBalance"
         Me.txtPoolBalance.ReadOnly = True
         Me.txtPoolBalance.Size = New System.Drawing.Size(100, 20)
         Me.txtPoolBalance.TabIndex = 7
+        Me.txtPoolBalance.Text = "0"
         Me.txtPoolBalance.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'lblPoolBalance
         '
-        Me.lblPoolBalance.Location = New System.Drawing.Point(213, 131)
+        Me.lblPoolBalance.Location = New System.Drawing.Point(4, 37)
         Me.lblPoolBalance.Name = "lblPoolBalance"
-        Me.lblPoolBalance.Size = New System.Drawing.Size(135, 13)
+        Me.lblPoolBalance.Size = New System.Drawing.Size(119, 13)
         Me.lblPoolBalance.TabIndex = 6
         Me.lblPoolBalance.Text = "Pool Balance"
         Me.lblPoolBalance.TextAlign = System.Drawing.ContentAlignment.TopRight
@@ -271,16 +320,17 @@ Partial Class Form1
         'txtHashrate
         '
         Me.txtHashrate.BackColor = System.Drawing.Color.White
-        Me.txtHashrate.Location = New System.Drawing.Point(354, 92)
+        Me.txtHashrate.Location = New System.Drawing.Point(657, 9)
         Me.txtHashrate.Name = "txtHashrate"
         Me.txtHashrate.ReadOnly = True
         Me.txtHashrate.Size = New System.Drawing.Size(100, 20)
         Me.txtHashrate.TabIndex = 5
+        Me.txtHashrate.Text = "0"
         Me.txtHashrate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'lblHashRate
         '
-        Me.lblHashRate.Location = New System.Drawing.Point(238, 95)
+        Me.lblHashRate.Location = New System.Drawing.Point(541, 12)
         Me.lblHashRate.Name = "lblHashRate"
         Me.lblHashRate.Size = New System.Drawing.Size(110, 13)
         Me.lblHashRate.TabIndex = 4
@@ -290,17 +340,18 @@ Partial Class Form1
         'txtDifficulty
         '
         Me.txtDifficulty.BackColor = System.Drawing.Color.White
-        Me.txtDifficulty.Location = New System.Drawing.Point(354, 56)
+        Me.txtDifficulty.Location = New System.Drawing.Point(412, 8)
         Me.txtDifficulty.Name = "txtDifficulty"
         Me.txtDifficulty.ReadOnly = True
         Me.txtDifficulty.Size = New System.Drawing.Size(100, 20)
         Me.txtDifficulty.TabIndex = 3
+        Me.txtDifficulty.Text = "0"
         Me.txtDifficulty.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'lblDifficulty
         '
         Me.lblDifficulty.AutoSize = True
-        Me.lblDifficulty.Location = New System.Drawing.Point(301, 59)
+        Me.lblDifficulty.Location = New System.Drawing.Point(359, 11)
         Me.lblDifficulty.Name = "lblDifficulty"
         Me.lblDifficulty.Size = New System.Drawing.Size(47, 13)
         Me.lblDifficulty.TabIndex = 2
@@ -310,17 +361,18 @@ Partial Class Form1
         'txtBlockHeight
         '
         Me.txtBlockHeight.BackColor = System.Drawing.Color.White
-        Me.txtBlockHeight.Location = New System.Drawing.Point(354, 21)
+        Me.txtBlockHeight.Location = New System.Drawing.Point(129, 8)
         Me.txtBlockHeight.Name = "txtBlockHeight"
         Me.txtBlockHeight.ReadOnly = True
         Me.txtBlockHeight.Size = New System.Drawing.Size(100, 20)
         Me.txtBlockHeight.TabIndex = 1
+        Me.txtBlockHeight.Text = "0"
         Me.txtBlockHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'lblBlockHeight
         '
         Me.lblBlockHeight.AutoSize = True
-        Me.lblBlockHeight.Location = New System.Drawing.Point(280, 24)
+        Me.lblBlockHeight.Location = New System.Drawing.Point(55, 11)
         Me.lblBlockHeight.Name = "lblBlockHeight"
         Me.lblBlockHeight.Size = New System.Drawing.Size(68, 13)
         Me.lblBlockHeight.TabIndex = 0
@@ -642,6 +694,37 @@ Partial Class Form1
         Me.tabSettings.TabIndex = 2
         Me.tabSettings.Text = "GUI Settings"
         '
+        'gbxErrorLog
+        '
+        Me.gbxErrorLog.Controls.Add(Me.btnClearLog)
+        Me.gbxErrorLog.Controls.Add(Me.txtError)
+        Me.gbxErrorLog.Location = New System.Drawing.Point(15, 89)
+        Me.gbxErrorLog.Name = "gbxErrorLog"
+        Me.gbxErrorLog.Size = New System.Drawing.Size(763, 321)
+        Me.gbxErrorLog.TabIndex = 1
+        Me.gbxErrorLog.TabStop = False
+        Me.gbxErrorLog.Text = "Noncer Pro GUI Error Log"
+        '
+        'btnClearLog
+        '
+        Me.btnClearLog.Location = New System.Drawing.Point(347, 292)
+        Me.btnClearLog.Name = "btnClearLog"
+        Me.btnClearLog.Size = New System.Drawing.Size(75, 23)
+        Me.btnClearLog.TabIndex = 1
+        Me.btnClearLog.Text = "Clear"
+        Me.btnClearLog.UseVisualStyleBackColor = True
+        '
+        'txtError
+        '
+        Me.txtError.BackColor = System.Drawing.Color.White
+        Me.txtError.Location = New System.Drawing.Point(9, 24)
+        Me.txtError.Multiline = True
+        Me.txtError.Name = "txtError"
+        Me.txtError.ReadOnly = True
+        Me.txtError.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txtError.Size = New System.Drawing.Size(744, 262)
+        Me.txtError.TabIndex = 0
+        '
         'gbxNoncerPro
         '
         Me.gbxNoncerPro.Controls.Add(Me.btnLocation)
@@ -708,36 +791,8 @@ Partial Class Form1
         '
         Me.ExecutableDialog.Title = "Specify NoncerPro Location"
         '
-        'gbxErrorLog
+        'timUpdateChart
         '
-        Me.gbxErrorLog.Controls.Add(Me.btnClearLog)
-        Me.gbxErrorLog.Controls.Add(Me.txtError)
-        Me.gbxErrorLog.Location = New System.Drawing.Point(15, 89)
-        Me.gbxErrorLog.Name = "gbxErrorLog"
-        Me.gbxErrorLog.Size = New System.Drawing.Size(763, 321)
-        Me.gbxErrorLog.TabIndex = 1
-        Me.gbxErrorLog.TabStop = False
-        Me.gbxErrorLog.Text = "Noncer Pro GUI Error Log"
-        '
-        'txtError
-        '
-        Me.txtError.BackColor = System.Drawing.Color.White
-        Me.txtError.Location = New System.Drawing.Point(9, 24)
-        Me.txtError.Multiline = True
-        Me.txtError.Name = "txtError"
-        Me.txtError.ReadOnly = True
-        Me.txtError.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtError.Size = New System.Drawing.Size(744, 262)
-        Me.txtError.TabIndex = 0
-        '
-        'btnClearLog
-        '
-        Me.btnClearLog.Location = New System.Drawing.Point(347, 292)
-        Me.btnClearLog.Name = "btnClearLog"
-        Me.btnClearLog.Size = New System.Drawing.Size(75, 23)
-        Me.btnClearLog.TabIndex = 1
-        Me.btnClearLog.Text = "Clear"
-        Me.btnClearLog.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -757,16 +812,18 @@ Partial Class Form1
         CType(Me.pbxStatus, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabStatistics.ResumeLayout(False)
         Me.tabStatistics.PerformLayout()
+        CType(Me.chtBalance, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.chtHashRate, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabOutput.ResumeLayout(False)
         Me.tabOutput.PerformLayout()
         Me.tabConfig.ResumeLayout(False)
         Me.tabConfig.PerformLayout()
         Me.tabSettings.ResumeLayout(False)
+        Me.gbxErrorLog.ResumeLayout(False)
+        Me.gbxErrorLog.PerformLayout()
         Me.gbxNoncerPro.ResumeLayout(False)
         Me.gbxNoncerPro.PerformLayout()
         Me.NotifyIconMenu.ResumeLayout(False)
-        Me.gbxErrorLog.ResumeLayout(False)
-        Me.gbxErrorLog.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -835,4 +892,7 @@ Partial Class Form1
     Friend WithEvents gbxErrorLog As GroupBox
     Friend WithEvents btnClearLog As Button
     Friend WithEvents txtError As TextBox
+    Friend WithEvents chtBalance As DataVisualization.Charting.Chart
+    Friend WithEvents chtHashRate As DataVisualization.Charting.Chart
+    Friend WithEvents timUpdateChart As Timer
 End Class
