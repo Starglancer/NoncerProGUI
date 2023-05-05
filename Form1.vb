@@ -25,6 +25,11 @@ Public Class Form1
             'Load Persistent properties
             txtLocation.Text = My.Settings.ExecutableLocation
             If txtLocation.Text = "" Or Not File.Exists(txtLocation.Text) Then Get_Executable_Location()
+            If txtLocation.Text = "" Or Not File.Exists(txtLocation.Text) Then
+                'User has cancelled the open file dialog without choosing a valid location, so close the application
+                ForceClose = True
+                Me.Close()
+            End If
             NoncerPath = Path.GetDirectoryName(txtLocation.Text)
 
             'Set constants
@@ -348,23 +353,27 @@ Public Class Form1
         Dim Key As String
 
         Try
-            Key = Data.Substring(30, 5)
+            If Data.Length > 36 Then
 
-            'Identify line to be processed and forward to the appropriate subroutine
-            Select Case Key
-                Case "New B"
-                    'Block Height
-                    Update_Block_Height(Data)
-                Case "Diffi"
-                    'Difficulty
-                    Update_Difficulty(Data)
-                Case "Total"
-                    'Hash Rate
-                    Update_Hashrate(Data)
-                Case "Pool "
-                    'Pool Balance
-                    Update_Pool_Balance(Data)
-            End Select
+                Key = Data.Substring(30, 5)
+
+                'Identify line to be processed and forward to the appropriate subroutine
+                Select Case Key
+                    Case "New B"
+                        'Block Height
+                        Update_Block_Height(Data)
+                    Case "Diffi"
+                        'Difficulty
+                        Update_Difficulty(Data)
+                    Case "Total"
+                        'Hash Rate
+                        Update_Hashrate(Data)
+                    Case "Pool "
+                        'Pool Balance
+                        Update_Pool_Balance(Data)
+                End Select
+
+            End If
 
         Catch ex As Exception
             Log_Error(ex)
@@ -595,7 +604,7 @@ Public Class Form1
             txtConfigPort.Text = "8444"
             txtConfigDevices.Text = "0"
             txtConfigThreads.Text = "2"
-            txtConfigBatchsize.Text = "92"
+            txtConfigBatchsize.Text = "50"
             chkConfigAPI.Checked = True
             txtConfigAPIport.Text = "3000"
             chkConfigOptimizer.Checked = False
