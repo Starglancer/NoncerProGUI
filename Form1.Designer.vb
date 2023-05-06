@@ -57,7 +57,6 @@ Partial Class Form1
         Me.txtBlockHeight = New System.Windows.Forms.TextBox()
         Me.lblBlockHeight = New System.Windows.Forms.Label()
         Me.tabOutput = New System.Windows.Forms.TabPage()
-        Me.txtOutput = New System.Windows.Forms.TextBox()
         Me.tabConfig = New System.Windows.Forms.TabPage()
         Me.lblWarning = New System.Windows.Forms.Label()
         Me.btnConfigCancel = New System.Windows.Forms.Button()
@@ -98,11 +97,12 @@ Partial Class Form1
         Me.timProcessOutput = New System.Windows.Forms.Timer(Me.components)
         Me.NotifyIcon = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.NotifyIconMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.mnuClearError = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuExit = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExecutableDialog = New System.Windows.Forms.OpenFileDialog()
         Me.timUpdateChart = New System.Windows.Forms.Timer(Me.components)
-        Me.mnuClearError = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.txtOutput = New System.Windows.Forms.RichTextBox()
         Me.TabControl.SuspendLayout()
         Me.tabStatus.SuspendLayout()
         CType(Me.pbxStatus, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -428,18 +428,6 @@ Partial Class Form1
         Me.tabOutput.Size = New System.Drawing.Size(792, 424)
         Me.tabOutput.TabIndex = 1
         Me.tabOutput.Text = "Output"
-        '
-        'txtOutput
-        '
-        Me.txtOutput.BackColor = System.Drawing.Color.White
-        Me.txtOutput.ForeColor = System.Drawing.Color.Black
-        Me.txtOutput.Location = New System.Drawing.Point(11, 9)
-        Me.txtOutput.Multiline = True
-        Me.txtOutput.Name = "txtOutput"
-        Me.txtOutput.ReadOnly = True
-        Me.txtOutput.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtOutput.Size = New System.Drawing.Size(769, 405)
-        Me.txtOutput.TabIndex = 0
         '
         'tabConfig
         '
@@ -819,12 +807,23 @@ Partial Class Form1
         '
         Me.NotifyIconMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClearError, Me.ToolStripSeparator1, Me.mnuExit})
         Me.NotifyIconMenu.Name = "NotifyIconMenu"
-        Me.NotifyIconMenu.Size = New System.Drawing.Size(181, 76)
+        Me.NotifyIconMenu.Size = New System.Drawing.Size(130, 54)
+        '
+        'mnuClearError
+        '
+        Me.mnuClearError.Name = "mnuClearError"
+        Me.mnuClearError.Size = New System.Drawing.Size(129, 22)
+        Me.mnuClearError.Text = "Clear Error"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(126, 6)
         '
         'mnuExit
         '
         Me.mnuExit.Name = "mnuExit"
-        Me.mnuExit.Size = New System.Drawing.Size(180, 22)
+        Me.mnuExit.Size = New System.Drawing.Size(129, 22)
         Me.mnuExit.Text = "Exit"
         '
         'ExecutableDialog
@@ -834,16 +833,16 @@ Partial Class Form1
         'timUpdateChart
         '
         '
-        'mnuClearError
+        'txtOutput
         '
-        Me.mnuClearError.Name = "mnuClearError"
-        Me.mnuClearError.Size = New System.Drawing.Size(180, 22)
-        Me.mnuClearError.Text = "Clear Error"
-        '
-        'ToolStripSeparator1
-        '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(177, 6)
+        Me.txtOutput.BackColor = System.Drawing.Color.Black
+        Me.txtOutput.ForeColor = System.Drawing.Color.DeepSkyBlue
+        Me.txtOutput.HideSelection = False
+        Me.txtOutput.Location = New System.Drawing.Point(3, 3)
+        Me.txtOutput.Name = "txtOutput"
+        Me.txtOutput.Size = New System.Drawing.Size(786, 418)
+        Me.txtOutput.TabIndex = 0
+        Me.txtOutput.Text = ""
         '
         'Form1
         '
@@ -867,7 +866,6 @@ Partial Class Form1
         CType(Me.chtBalance, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.chtHashRate, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabOutput.ResumeLayout(False)
-        Me.tabOutput.PerformLayout()
         Me.tabConfig.ResumeLayout(False)
         Me.tabConfig.PerformLayout()
         Me.tabSettings.ResumeLayout(False)
@@ -891,7 +889,6 @@ Partial Class Form1
     Friend WithEvents lblNoncerProGUI As Label
     Friend WithEvents timCheckStatus As Timer
     Friend WithEvents tabOutput As TabPage
-    Friend WithEvents txtOutput As TextBox
     Friend WithEvents timProcessOutput As Timer
     Friend WithEvents NotifyIcon As NotifyIcon
     Friend WithEvents NotifyIconMenu As ContextMenuStrip
@@ -952,4 +949,5 @@ Partial Class Form1
     Friend WithEvents pbxReset As PictureBox
     Friend WithEvents mnuClearError As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
+    Friend WithEvents txtOutput As RichTextBox
 End Class

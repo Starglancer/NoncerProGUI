@@ -372,6 +372,20 @@ Public Class Form1
                     LastLine = LastLine.Replace("[33mwarn[39m", " warn ")
                     LastLine = LastLine.Replace("[31merror[39m", " error ")
 
+                    If LastLine.Contains(" warn ") Then
+                        WarnAndErr += 1
+                        txtWarnAndErr.Text = WarnAndErr
+                        txtOutput.SelectionColor = Color.Orange
+                        Display_Balloon_Tip("warn", LastLine.Substring(30))
+                    ElseIf Lastline.Contains(" error ") Then
+                        WarnAndErr += 1
+                        txtWarnAndErr.Text = WarnAndErr
+                        txtOutput.SelectionColor = Color.Red
+                        Display_Balloon_Tip("error", LastLine.Substring(31))
+                    Else
+                        txtOutput.SelectionColor = Color.DeepSkyBlue
+                    End If
+
                     'Output data to output textbox
                     txtOutput.AppendText(LastLine + Environment.NewLine)
 
@@ -413,11 +427,6 @@ Public Class Form1
                         Update_Pool_Balance(Data)
                 End Select
 
-            End If
-
-            If Data.Contains(" warn ") Or Data.Contains(" error ") Then
-                WarnAndErr += 1
-                txtWarnAndErr.Text = WarnAndErr
             End If
 
         Catch ex As Exception
@@ -875,6 +884,32 @@ Public Class Form1
         Try
             WarnAndErr = 0
             txtWarnAndErr.Text = "0"
+
+        Catch ex As Exception
+            Log_Error(ex)
+        End Try
+
+    End Sub
+
+    Private Sub Display_Balloon_Tip(Severity As String, Message As String)
+
+        Dim Title As String
+
+        Try
+            'Configure Balloon tip
+            If Severity = "warn" Then
+                Title = "Warning"
+                NotifyIcon.BalloonTipIcon = ToolTipIcon.Warning
+            Else
+                Title = "Error"
+                NotifyIcon.BalloonTipIcon = ToolTipIcon.Error
+            End If
+
+            NotifyIcon.BalloonTipTitle = "Noncer Pro " + Title
+            NotifyIcon.BalloonTipText = Message
+
+            'Show Balloon tip
+            NotifyIcon.ShowBalloonTip(8000)
 
         Catch ex As Exception
             Log_Error(ex)
