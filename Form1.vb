@@ -15,6 +15,7 @@ Public Class Form1
     Dim TrendDurationMinutes As Integer
     Dim UpdateIntervalSeconds As Integer
     Dim RestartPoints As Integer
+    Dim WarnAndErr As Integer
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -58,6 +59,9 @@ Public Class Form1
 
             'Set Initial Status as stopped
             Update_Status("stopped")
+
+            'Initialise error counter
+            WarnAndErr = 0
 
             'Clear output window
             txtOutput.Text = ""
@@ -217,28 +221,48 @@ Public Class Form1
         Try
             'Update status
             If status = "running" Then
-                pbxStatus.Image = My.Resources.MiningGreen
                 Running = True
                 btnStart.Enabled = False
                 btnStop.Enabled = True
                 timCheckStatus.Enabled = True
                 timProcessOutput.Enabled = True
                 timUpdateChart.Enabled = True
-                NotifyIcon.Icon = My.Resources.MiningGreen1
                 NotifyIcon.Text = "NoncerPro Running"
-                Me.Icon = My.Resources.MiningGreen1
+                If WarnAndErr = 0 Then
+                    pbxStatus.Image = My.Resources.MiningGreen
+                    NotifyIcon.Icon = My.Resources.MiningGreen1
+                    Me.Icon = My.Resources.MiningGreen1
+                    pbxReset.Visible = False
+                    mnuClearError.Visible = False
+                    ToolStripSeparator1.Visible = False
+                Else
+                    pbxStatus.Image = My.Resources.MiningAmber
+                    NotifyIcon.Icon = My.Resources.MiningAmber1
+                    Me.Icon = My.Resources.MiningAmber1
+                    pbxReset.Visible = True
+                    mnuClearError.Visible = True
+                    ToolStripSeparator1.Visible = True
+                End If
             Else
-                pbxStatus.Image = My.Resources.MiningRed
                 Running = False
                 btnStart.Enabled = True
                 btnStop.Enabled = False
                 timCheckStatus.Enabled = False
                 timProcessOutput.Enabled = False
                 timUpdateChart.Enabled = False
-                txtConfirmedPoolBalance.Text = "0"
-                NotifyIcon.Icon = My.Resources.MiningRed1
                 NotifyIcon.Text = "NoncerPro Stopped"
+                pbxStatus.Image = My.Resources.MiningRed
+                NotifyIcon.Icon = My.Resources.MiningRed1
                 Me.Icon = My.Resources.MiningRed1
+                If WarnAndErr = 0 Then
+                    pbxReset.Visible = False
+                    mnuClearError.Visible = False
+                    ToolStripSeparator1.Visible = False
+                Else
+                    pbxReset.Visible = True
+                    mnuClearError.Visible = True
+                    ToolStripSeparator1.Visible = True
+                End If
             End If
 
         Catch ex As Exception
@@ -389,6 +413,11 @@ Public Class Form1
                         Update_Pool_Balance(Data)
                 End Select
 
+            End If
+
+            If Data.Contains(" warn ") Or Data.Contains(" error ") Then
+                WarnAndErr += 1
+                txtWarnAndErr.Text = WarnAndErr
             End If
 
         Catch ex As Exception
@@ -812,6 +841,40 @@ Public Class Form1
                 End If
 
             End If
+
+        Catch ex As Exception
+            Log_Error(ex)
+        End Try
+
+    End Sub
+
+    Private Sub pbxReset_MouseClick(sender As Object, e As MouseEventArgs) Handles pbxReset.MouseClick
+
+        Try
+            Clear_Error()
+
+        Catch ex As Exception
+            Log_Error(ex)
+        End Try
+
+    End Sub
+
+    Private Sub mnuClearError_Click(sender As Object, e As EventArgs) Handles mnuClearError.Click
+
+        Try
+            Clear_Error()
+
+        Catch ex As Exception
+            Log_Error(ex)
+        End Try
+
+    End Sub
+
+    Private Sub Clear_Error()
+
+        Try
+            WarnAndErr = 0
+            txtWarnAndErr.Text = "0"
 
         Catch ex As Exception
             Log_Error(ex)

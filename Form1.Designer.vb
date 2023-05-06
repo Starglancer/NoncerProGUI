@@ -41,6 +41,9 @@ Partial Class Form1
         Me.btnStop = New System.Windows.Forms.Button()
         Me.btnStart = New System.Windows.Forms.Button()
         Me.tabStatistics = New System.Windows.Forms.TabPage()
+        Me.pbxReset = New System.Windows.Forms.PictureBox()
+        Me.lblWarnAndErr = New System.Windows.Forms.Label()
+        Me.txtWarnAndErr = New System.Windows.Forms.TextBox()
         Me.chtBalance = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.chtHashRate = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.txtConfirmedPoolBalance = New System.Windows.Forms.TextBox()
@@ -98,10 +101,13 @@ Partial Class Form1
         Me.mnuExit = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExecutableDialog = New System.Windows.Forms.OpenFileDialog()
         Me.timUpdateChart = New System.Windows.Forms.Timer(Me.components)
+        Me.mnuClearError = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.TabControl.SuspendLayout()
         Me.tabStatus.SuspendLayout()
         CType(Me.pbxStatus, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabStatistics.SuspendLayout()
+        CType(Me.pbxReset, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.chtBalance, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.chtHashRate, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabOutput.SuspendLayout()
@@ -225,6 +231,9 @@ Partial Class Form1
         'tabStatistics
         '
         Me.tabStatistics.BackColor = System.Drawing.Color.Transparent
+        Me.tabStatistics.Controls.Add(Me.pbxReset)
+        Me.tabStatistics.Controls.Add(Me.lblWarnAndErr)
+        Me.tabStatistics.Controls.Add(Me.txtWarnAndErr)
         Me.tabStatistics.Controls.Add(Me.chtBalance)
         Me.tabStatistics.Controls.Add(Me.chtHashRate)
         Me.tabStatistics.Controls.Add(Me.txtConfirmedPoolBalance)
@@ -242,6 +251,37 @@ Partial Class Form1
         Me.tabStatistics.Size = New System.Drawing.Size(792, 424)
         Me.tabStatistics.TabIndex = 3
         Me.tabStatistics.Text = "Statistics"
+        '
+        'pbxReset
+        '
+        Me.pbxReset.Image = Global.NoncerProGUI.My.Resources.Resources.Reset
+        Me.pbxReset.Location = New System.Drawing.Point(757, 37)
+        Me.pbxReset.Name = "pbxReset"
+        Me.pbxReset.Size = New System.Drawing.Size(12, 12)
+        Me.pbxReset.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.pbxReset.TabIndex = 14
+        Me.pbxReset.TabStop = False
+        '
+        'lblWarnAndErr
+        '
+        Me.lblWarnAndErr.AutoSize = True
+        Me.lblWarnAndErr.Location = New System.Drawing.Point(548, 37)
+        Me.lblWarnAndErr.Name = "lblWarnAndErr"
+        Me.lblWarnAndErr.Size = New System.Drawing.Size(103, 13)
+        Me.lblWarnAndErr.TabIndex = 13
+        Me.lblWarnAndErr.Text = "Warnings and Errors"
+        Me.lblWarnAndErr.TextAlign = System.Drawing.ContentAlignment.TopRight
+        '
+        'txtWarnAndErr
+        '
+        Me.txtWarnAndErr.BackColor = System.Drawing.Color.White
+        Me.txtWarnAndErr.Location = New System.Drawing.Point(657, 34)
+        Me.txtWarnAndErr.Name = "txtWarnAndErr"
+        Me.txtWarnAndErr.ReadOnly = True
+        Me.txtWarnAndErr.Size = New System.Drawing.Size(100, 20)
+        Me.txtWarnAndErr.TabIndex = 12
+        Me.txtWarnAndErr.Text = "0"
+        Me.txtWarnAndErr.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'chtBalance
         '
@@ -777,14 +817,14 @@ Partial Class Form1
         '
         'NotifyIconMenu
         '
-        Me.NotifyIconMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuExit})
+        Me.NotifyIconMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClearError, Me.ToolStripSeparator1, Me.mnuExit})
         Me.NotifyIconMenu.Name = "NotifyIconMenu"
-        Me.NotifyIconMenu.Size = New System.Drawing.Size(94, 26)
+        Me.NotifyIconMenu.Size = New System.Drawing.Size(181, 76)
         '
         'mnuExit
         '
         Me.mnuExit.Name = "mnuExit"
-        Me.mnuExit.Size = New System.Drawing.Size(93, 22)
+        Me.mnuExit.Size = New System.Drawing.Size(180, 22)
         Me.mnuExit.Text = "Exit"
         '
         'ExecutableDialog
@@ -793,6 +833,17 @@ Partial Class Form1
         '
         'timUpdateChart
         '
+        '
+        'mnuClearError
+        '
+        Me.mnuClearError.Name = "mnuClearError"
+        Me.mnuClearError.Size = New System.Drawing.Size(180, 22)
+        Me.mnuClearError.Text = "Clear Error"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(177, 6)
         '
         'Form1
         '
@@ -812,6 +863,7 @@ Partial Class Form1
         CType(Me.pbxStatus, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabStatistics.ResumeLayout(False)
         Me.tabStatistics.PerformLayout()
+        CType(Me.pbxReset, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.chtBalance, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.chtHashRate, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabOutput.ResumeLayout(False)
@@ -895,4 +947,9 @@ Partial Class Form1
     Friend WithEvents chtBalance As DataVisualization.Charting.Chart
     Friend WithEvents chtHashRate As DataVisualization.Charting.Chart
     Friend WithEvents timUpdateChart As Timer
+    Friend WithEvents lblWarnAndErr As Label
+    Friend WithEvents txtWarnAndErr As TextBox
+    Friend WithEvents pbxReset As PictureBox
+    Friend WithEvents mnuClearError As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
 End Class

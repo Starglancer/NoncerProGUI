@@ -142,5 +142,8 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\MiningRed.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Reset.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
