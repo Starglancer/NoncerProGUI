@@ -864,4 +864,27 @@ Public Class Form1
 
     End Sub
 
+    Private Sub tabOutput_Enter(sender As Object, e As EventArgs) Handles tabOutput.Enter
+
+        Dim Output As String
+
+        Try
+            'This is a cludge to ensure that the output textbox displays correctly after the application is restored from the tray icon.
+
+            'Save and reload the text including colour codes
+            Output = txtOutput.Rtf
+            txtOutput.Rtf = ""
+            txtOutput.Rtf = Output
+
+            'Scroll to end of the text
+            txtOutput.SelectionStart = txtOutput.Text.Length
+            txtOutput.SelectionLength = 0
+            txtOutput.ScrollToCaret()
+
+        Catch ex As Exception
+            Log_Error(ex)
+        End Try
+
+    End Sub
+
 End Class
