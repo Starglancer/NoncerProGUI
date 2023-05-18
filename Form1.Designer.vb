@@ -250,7 +250,7 @@ Partial Class Form1
         'lblInvalidShares
         '
         Me.lblInvalidShares.AutoSize = True
-        Me.lblInvalidShares.Location = New System.Drawing.Point(548, 37)
+        Me.lblInvalidShares.Location = New System.Drawing.Point(577, 37)
         Me.lblInvalidShares.Name = "lblInvalidShares"
         Me.lblInvalidShares.Size = New System.Drawing.Size(74, 13)
         Me.lblInvalidShares.TabIndex = 13
