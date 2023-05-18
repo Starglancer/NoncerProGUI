@@ -1,5 +1,6 @@
 ﻿Imports System.Collections.Concurrent
 Imports System.IO
+Imports System.Windows.Forms.AxHost
 Imports System.Windows.Forms.DataVisualization.Charting
 
 Public Class Form1
@@ -15,7 +16,7 @@ Public Class Form1
     Dim TrendDurationMinutes As Integer
     Dim UpdateIntervalSeconds As Integer
     Dim RestartPoints As Integer
-    Dim WarnAndErr As Integer
+    Dim InvalidShares As Integer
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -60,8 +61,8 @@ Public Class Form1
             'Set Initial Status as stopped
             Update_Status("stopped")
 
-            'Initialise error counter
-            WarnAndErr = 0
+            'Initialise invalid share counter
+            InvalidShares = 0
 
             'Clear output window
             txtOutput.Text = ""
@@ -228,21 +229,9 @@ Public Class Form1
                 timProcessOutput.Enabled = True
                 timUpdateChart.Enabled = True
                 NotifyIcon.Text = "NoncerPro Running"
-                If WarnAndErr = 0 Then
-                    pbxStatus.Image = My.Resources.MiningGreen
-                    NotifyIcon.Icon = My.Resources.MiningGreen1
-                    Me.Icon = My.Resources.MiningGreen1
-                    pbxReset.Visible = False
-                    mnuClearError.Visible = False
-                    ToolStripSeparator1.Visible = False
-                Else
-                    pbxStatus.Image = My.Resources.MiningAmber
-                    NotifyIcon.Icon = My.Resources.MiningAmber1
-                    Me.Icon = My.Resources.MiningAmber1
-                    pbxReset.Visible = True
-                    mnuClearError.Visible = True
-                    ToolStripSeparator1.Visible = True
-                End If
+                pbxStatus.Image = My.Resources.MiningGreen
+                NotifyIcon.Icon = My.Resources.MiningGreen1
+                Me.Icon = My.Resources.MiningGreen1
             Else
                 Running = False
                 btnStart.Enabled = True
@@ -254,15 +243,6 @@ Public Class Form1
                 pbxStatus.Image = My.Resources.MiningRed
                 NotifyIcon.Icon = My.Resources.MiningRed1
                 Me.Icon = My.Resources.MiningRed1
-                If WarnAndErr = 0 Then
-                    pbxReset.Visible = False
-                    mnuClearError.Visible = False
-                    ToolStripSeparator1.Visible = False
-                Else
-                    pbxReset.Visible = True
-                    mnuClearError.Visible = True
-                    ToolStripSeparator1.Visible = True
-                End If
             End If
 
         Catch ex As Exception
@@ -373,15 +353,16 @@ Public Class Form1
                     LastLine = LastLine.Replace("[31merror[39m", " error ")
 
                     If LastLine.Contains(" warn ") Then
-                        WarnAndErr += 1
-                        txtWarnAndErr.Text = WarnAndErr
                         txtOutput.SelectionColor = Color.Orange
                         Display_Balloon_Tip("warn", LastLine.Substring(30))
-                    ElseIf Lastline.Contains(" error ") Then
-                        WarnAndErr += 1
-                        txtWarnAndErr.Text = WarnAndErr
+                    ElseIf LastLine.Contains(" error ") Then
                         txtOutput.SelectionColor = Color.Red
-                        Display_Balloon_Tip("error", LastLine.Substring(31))
+                        If LastLine.Substring(31, 43) = "Error from pool: invalid share: invalid pow" Then
+                            InvalidShares += 1
+                            txtInvalidShares.Text = InvalidShares
+                        Else
+                            Display_Balloon_Tip("error", LastLine.Substring(31))
+                        End If
                     Else
                         txtOutput.SelectionColor = Color.DeepSkyBlue
                     End If
@@ -850,40 +831,6 @@ Public Class Form1
                 End If
 
             End If
-
-        Catch ex As Exception
-            Log_Error(ex)
-        End Try
-
-    End Sub
-
-    Private Sub pbxReset_MouseClick(sender As Object, e As MouseEventArgs) Handles pbxReset.MouseClick
-
-        Try
-            Clear_Error()
-
-        Catch ex As Exception
-            Log_Error(ex)
-        End Try
-
-    End Sub
-
-    Private Sub mnuClearError_Click(sender As Object, e As EventArgs) Handles mnuClearError.Click
-
-        Try
-            Clear_Error()
-
-        Catch ex As Exception
-            Log_Error(ex)
-        End Try
-
-    End Sub
-
-    Private Sub Clear_Error()
-
-        Try
-            WarnAndErr = 0
-            txtWarnAndErr.Text = "0"
 
         Catch ex As Exception
             Log_Error(ex)

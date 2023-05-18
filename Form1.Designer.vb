@@ -41,9 +41,8 @@ Partial Class Form1
         Me.btnStop = New System.Windows.Forms.Button()
         Me.btnStart = New System.Windows.Forms.Button()
         Me.tabStatistics = New System.Windows.Forms.TabPage()
-        Me.pbxReset = New System.Windows.Forms.PictureBox()
-        Me.lblWarnAndErr = New System.Windows.Forms.Label()
-        Me.txtWarnAndErr = New System.Windows.Forms.TextBox()
+        Me.lblInvalidShares = New System.Windows.Forms.Label()
+        Me.txtInvalidShares = New System.Windows.Forms.TextBox()
         Me.chtBalance = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.chtHashRate = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.txtConfirmedPoolBalance = New System.Windows.Forms.TextBox()
@@ -57,6 +56,7 @@ Partial Class Form1
         Me.txtBlockHeight = New System.Windows.Forms.TextBox()
         Me.lblBlockHeight = New System.Windows.Forms.Label()
         Me.tabOutput = New System.Windows.Forms.TabPage()
+        Me.txtOutput = New System.Windows.Forms.RichTextBox()
         Me.tabConfig = New System.Windows.Forms.TabPage()
         Me.lblWarning = New System.Windows.Forms.Label()
         Me.btnConfigCancel = New System.Windows.Forms.Button()
@@ -97,17 +97,13 @@ Partial Class Form1
         Me.timProcessOutput = New System.Windows.Forms.Timer(Me.components)
         Me.NotifyIcon = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.NotifyIconMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.mnuClearError = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuExit = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExecutableDialog = New System.Windows.Forms.OpenFileDialog()
         Me.timUpdateChart = New System.Windows.Forms.Timer(Me.components)
-        Me.txtOutput = New System.Windows.Forms.RichTextBox()
         Me.TabControl.SuspendLayout()
         Me.tabStatus.SuspendLayout()
         CType(Me.pbxStatus, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabStatistics.SuspendLayout()
-        CType(Me.pbxReset, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.chtBalance, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.chtHashRate, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabOutput.SuspendLayout()
@@ -231,9 +227,8 @@ Partial Class Form1
         'tabStatistics
         '
         Me.tabStatistics.BackColor = System.Drawing.Color.Transparent
-        Me.tabStatistics.Controls.Add(Me.pbxReset)
-        Me.tabStatistics.Controls.Add(Me.lblWarnAndErr)
-        Me.tabStatistics.Controls.Add(Me.txtWarnAndErr)
+        Me.tabStatistics.Controls.Add(Me.lblInvalidShares)
+        Me.tabStatistics.Controls.Add(Me.txtInvalidShares)
         Me.tabStatistics.Controls.Add(Me.chtBalance)
         Me.tabStatistics.Controls.Add(Me.chtHashRate)
         Me.tabStatistics.Controls.Add(Me.txtConfirmedPoolBalance)
@@ -252,36 +247,26 @@ Partial Class Form1
         Me.tabStatistics.TabIndex = 3
         Me.tabStatistics.Text = "Statistics"
         '
-        'pbxReset
+        'lblInvalidShares
         '
-        Me.pbxReset.Image = Global.NoncerProGUI.My.Resources.Resources.Reset
-        Me.pbxReset.Location = New System.Drawing.Point(757, 37)
-        Me.pbxReset.Name = "pbxReset"
-        Me.pbxReset.Size = New System.Drawing.Size(12, 12)
-        Me.pbxReset.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pbxReset.TabIndex = 14
-        Me.pbxReset.TabStop = False
+        Me.lblInvalidShares.AutoSize = True
+        Me.lblInvalidShares.Location = New System.Drawing.Point(548, 37)
+        Me.lblInvalidShares.Name = "lblInvalidShares"
+        Me.lblInvalidShares.Size = New System.Drawing.Size(74, 13)
+        Me.lblInvalidShares.TabIndex = 13
+        Me.lblInvalidShares.Text = "Invalid Shares"
+        Me.lblInvalidShares.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
-        'lblWarnAndErr
+        'txtInvalidShares
         '
-        Me.lblWarnAndErr.AutoSize = True
-        Me.lblWarnAndErr.Location = New System.Drawing.Point(548, 37)
-        Me.lblWarnAndErr.Name = "lblWarnAndErr"
-        Me.lblWarnAndErr.Size = New System.Drawing.Size(103, 13)
-        Me.lblWarnAndErr.TabIndex = 13
-        Me.lblWarnAndErr.Text = "Warnings and Errors"
-        Me.lblWarnAndErr.TextAlign = System.Drawing.ContentAlignment.TopRight
-        '
-        'txtWarnAndErr
-        '
-        Me.txtWarnAndErr.BackColor = System.Drawing.Color.White
-        Me.txtWarnAndErr.Location = New System.Drawing.Point(657, 34)
-        Me.txtWarnAndErr.Name = "txtWarnAndErr"
-        Me.txtWarnAndErr.ReadOnly = True
-        Me.txtWarnAndErr.Size = New System.Drawing.Size(100, 20)
-        Me.txtWarnAndErr.TabIndex = 12
-        Me.txtWarnAndErr.Text = "0"
-        Me.txtWarnAndErr.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtInvalidShares.BackColor = System.Drawing.Color.White
+        Me.txtInvalidShares.Location = New System.Drawing.Point(657, 34)
+        Me.txtInvalidShares.Name = "txtInvalidShares"
+        Me.txtInvalidShares.ReadOnly = True
+        Me.txtInvalidShares.Size = New System.Drawing.Size(100, 20)
+        Me.txtInvalidShares.TabIndex = 12
+        Me.txtInvalidShares.Text = "0"
+        Me.txtInvalidShares.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'chtBalance
         '
@@ -428,6 +413,17 @@ Partial Class Form1
         Me.tabOutput.Size = New System.Drawing.Size(792, 424)
         Me.tabOutput.TabIndex = 1
         Me.tabOutput.Text = "Output"
+        '
+        'txtOutput
+        '
+        Me.txtOutput.BackColor = System.Drawing.Color.Black
+        Me.txtOutput.ForeColor = System.Drawing.Color.DeepSkyBlue
+        Me.txtOutput.HideSelection = False
+        Me.txtOutput.Location = New System.Drawing.Point(3, 3)
+        Me.txtOutput.Name = "txtOutput"
+        Me.txtOutput.Size = New System.Drawing.Size(786, 418)
+        Me.txtOutput.TabIndex = 0
+        Me.txtOutput.Text = ""
         '
         'tabConfig
         '
@@ -805,25 +801,14 @@ Partial Class Form1
         '
         'NotifyIconMenu
         '
-        Me.NotifyIconMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClearError, Me.ToolStripSeparator1, Me.mnuExit})
+        Me.NotifyIconMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuExit})
         Me.NotifyIconMenu.Name = "NotifyIconMenu"
-        Me.NotifyIconMenu.Size = New System.Drawing.Size(130, 54)
-        '
-        'mnuClearError
-        '
-        Me.mnuClearError.Name = "mnuClearError"
-        Me.mnuClearError.Size = New System.Drawing.Size(129, 22)
-        Me.mnuClearError.Text = "Clear Error"
-        '
-        'ToolStripSeparator1
-        '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(126, 6)
+        Me.NotifyIconMenu.Size = New System.Drawing.Size(94, 26)
         '
         'mnuExit
         '
         Me.mnuExit.Name = "mnuExit"
-        Me.mnuExit.Size = New System.Drawing.Size(129, 22)
+        Me.mnuExit.Size = New System.Drawing.Size(93, 22)
         Me.mnuExit.Text = "Exit"
         '
         'ExecutableDialog
@@ -832,17 +817,6 @@ Partial Class Form1
         '
         'timUpdateChart
         '
-        '
-        'txtOutput
-        '
-        Me.txtOutput.BackColor = System.Drawing.Color.Black
-        Me.txtOutput.ForeColor = System.Drawing.Color.DeepSkyBlue
-        Me.txtOutput.HideSelection = False
-        Me.txtOutput.Location = New System.Drawing.Point(3, 3)
-        Me.txtOutput.Name = "txtOutput"
-        Me.txtOutput.Size = New System.Drawing.Size(786, 418)
-        Me.txtOutput.TabIndex = 0
-        Me.txtOutput.Text = ""
         '
         'Form1
         '
@@ -862,7 +836,6 @@ Partial Class Form1
         CType(Me.pbxStatus, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabStatistics.ResumeLayout(False)
         Me.tabStatistics.PerformLayout()
-        CType(Me.pbxReset, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.chtBalance, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.chtHashRate, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabOutput.ResumeLayout(False)
@@ -944,10 +917,7 @@ Partial Class Form1
     Friend WithEvents chtBalance As DataVisualization.Charting.Chart
     Friend WithEvents chtHashRate As DataVisualization.Charting.Chart
     Friend WithEvents timUpdateChart As Timer
-    Friend WithEvents lblWarnAndErr As Label
-    Friend WithEvents txtWarnAndErr As TextBox
-    Friend WithEvents pbxReset As PictureBox
-    Friend WithEvents mnuClearError As ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
+    Friend WithEvents lblInvalidShares As Label
+    Friend WithEvents txtInvalidShares As TextBox
     Friend WithEvents txtOutput As RichTextBox
 End Class
