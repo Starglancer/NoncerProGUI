@@ -883,6 +883,7 @@ Public Class Form1
 
             'Save and reload the text including colour codes
             Output = txtOutput.Rtf
+            txtOutput.Rtf = ""
             txtOutput.Rtf = Output
 
             'Scroll to end of the text
