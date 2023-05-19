@@ -1,6 +1,5 @@
 ﻿Imports System.Collections.Concurrent
 Imports System.IO
-Imports System.Windows.Forms.AxHost
 Imports System.Windows.Forms.DataVisualization.Charting
 
 Public Class Form1
@@ -17,6 +16,7 @@ Public Class Form1
     Dim UpdateIntervalSeconds As Integer
     Dim RestartPoints As Integer
     Dim InvalidShares As Integer
+    Dim SizeCheckCounter As Integer
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -63,6 +63,9 @@ Public Class Form1
 
             'Initialise invalid share counter
             InvalidShares = 0
+
+            'Initialise size check counter
+            SizeCheckCounter = 0
 
             'Clear output window
             txtOutput.Text = ""
@@ -375,6 +378,13 @@ Public Class Form1
 
                 End If
 
+            End If
+
+            'Once an hour, check and control the output text size
+            SizeCheckCounter += 1
+            If SizeCheckCounter > 3600 Then
+                SizeCheckCounter = 0
+                Check_Output_Size()
             End If
 
         Catch ex As Exception
@@ -873,13 +883,29 @@ Public Class Form1
 
             'Save and reload the text including colour codes
             Output = txtOutput.Rtf
-            txtOutput.Rtf = ""
             txtOutput.Rtf = Output
 
             'Scroll to end of the text
             txtOutput.SelectionStart = txtOutput.Text.Length
             txtOutput.SelectionLength = 0
             txtOutput.ScrollToCaret()
+
+        Catch ex As Exception
+            Log_Error(ex)
+        End Try
+
+    End Sub
+
+    Private Sub Check_Output_Size()
+
+        'Routine to check the size of the output text and reduce it if necessary
+        'maximum size allowed is 1000 lines
+
+        Try
+            If txtOutput.Lines.Length > 1000 Then
+                txtOutput.Select(0, txtOutput.GetFirstCharIndexFromLine(txtOutput.Lines.Length - 1000))
+                txtOutput.SelectedText = ""
+            End If
 
         Catch ex As Exception
             Log_Error(ex)
