@@ -24,11 +24,13 @@ IMPORTANT NOTE - the noncer pro miner is not included with this application and 
  - Includes notification area icon for running the miner in the background
  - Icons and status tab colour coded to show whether or not miner is running
  - Auto restart of miner if it fails more than 1 minute after starting
+ - Real time statistics including graphical trends of hashrate and pool balance
+ - Output window displaying last 1000 lines of colour coded output
+ - Config file generator to save need to manually edit the config file
  
 ## Requirements
 
- - Network connection to the internet
- - No inbound ports need to be opened
+- Noncer Pro installation
  - Microsoft Windows operating system (I have tested on Windows 10 only)
  - Dot Net Framework 4.7.2. This will be installed at deployment time if not already present
  
@@ -39,5 +41,4 @@ IMPORTANT NOTE - the noncer pro miner is not included with this application and 
  
 ## Acknowledgements
 
-- Thanks to rraallvv for his [NimiqClientSharp](https://github.com/rraallvv/NimiqClientSharp) wrapper used in this project
 - Thanks to [Advanced Installer](https://www.advancedinstaller.com/) for their excellent installer which has been used from release 1.00 onwards
