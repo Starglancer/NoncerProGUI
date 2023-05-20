@@ -9,15 +9,15 @@ IMPORTANT NOTE - the noncer pro miner is not included with this application and 
 
 ## Screenshots
 
-![Status](https://github.com/Starglancer/NoncerProGUI/assets/124823644/c902e295-978e-42c8-aeba-2e32fa5dd3bd)
+![Status](https://github.com/Starglancer/NoncerProGUI/assets/124823644/fd01c91e-f9d5-4728-907e-98a691822ced)
 
-![Statistics](https://github.com/Starglancer/NoncerProGUI/assets/124823644/710e0dc6-f8cc-4813-8da4-4563b4507f17)
+![Statistics](https://github.com/Starglancer/NoncerProGUI/assets/124823644/07670799-0525-4c16-9d7a-c6f48f4dd30d)
 
-![Output](https://github.com/Starglancer/NoncerProGUI/assets/124823644/0efb1e80-ef61-4803-ada1-a6e15b4c57de)
+![Output](https://github.com/Starglancer/NoncerProGUI/assets/124823644/0fc16d1e-5e02-4c7b-899a-eec95da8d7a4)
 
-![Config](https://github.com/Starglancer/NoncerProGUI/assets/124823644/abae8067-f78c-4e68-b31d-d680e7ca4739)
+![Config](https://github.com/Starglancer/NoncerProGUI/assets/124823644/a4e2b697-8ae2-4468-bed7-1b5c1de0749d)
 
-![Gui Settings](https://github.com/Starglancer/NoncerProGUI/assets/124823644/53d8d125-cb05-453a-9f98-7cdcc21829a4)
+![Gui Settings](https://github.com/Starglancer/NoncerProGUI/assets/124823644/8efccee1-b4c8-4cf7-8581-fe2a1108b062)
 
 ## Features
 
