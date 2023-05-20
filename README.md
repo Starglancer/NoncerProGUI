@@ -1,27 +1,29 @@
-# Nimiq RPC
+# Noncer Pro GUI
 
 ## Description
 
-A Windows Forms based gui for the Nimiq client RPC calls
+A Windows Forms based gui for the command line Noncer Pro  Nvidia Nimiq miner.
+This application is for users who are uncomfortable with the command line or simply prefer a GUI interface.
+
+IMPORTANT NOTE - the noncer pro miner is not included with this application and must be downloaded separately from the [Noncer Pro site](https://www.noncer.pro/)
 
 ## Screenshots
 
-![Status](https://user-images.githubusercontent.com/124823644/235308411-dc8d3cc9-b7b1-4d1b-83e9-28fa11b8ad53.png)
+![Status](https://github.com/Starglancer/NoncerProGUI/assets/124823644/c902e295-978e-42c8-aeba-2e32fa5dd3bd)
 
-![PeerCount](https://user-images.githubusercontent.com/124823644/235308415-77d07d7b-d8b6-40cd-91b8-044b11994089.png)
+![Statistics](https://github.com/Starglancer/NoncerProGUI/assets/124823644/710e0dc6-f8cc-4813-8da4-4563b4507f17)
 
-![Mining](https://user-images.githubusercontent.com/124823644/235308421-6df5bfd9-58c5-4ecb-84c7-8eda8821a767.png)
+![Output](https://github.com/Starglancer/NoncerProGUI/assets/124823644/0efb1e80-ef61-4803-ada1-a6e15b4c57de)
+
+![Config](https://github.com/Starglancer/NoncerProGUI/assets/124823644/abae8067-f78c-4e68-b31d-d680e7ca4739)
+
+![Gui Settings](https://github.com/Starglancer/NoncerProGUI/assets/124823644/53d8d125-cb05-453a-9f98-7cdcc21829a4)
 
 ## Features
 
- - Will work with both local and remote Nimiq clients
- - Heartbeat check every 10 seconds to ensure client is still running
- - Tray icon for running in the background to monitor status
- - Display details of blocks, peers, transactions and mining status
- - Rolling 60 minute trend charts for block number, peer count and hash rate
- - control mining parameters and client logging level
- - Export any data to csv file
- - DOES NOT create transactions by design. Please use the standard Nimiq web wallet for that purpose
+ - Includes notification area icon for running the miner in the background
+ - Icons and status tab colour coded to show whether or not miner is running
+ - Auto restart of miner if it fails more than 1 minute after starting
  
 ## Requirements
 
